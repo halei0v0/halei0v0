@@ -23,11 +23,13 @@ draft: false
 
 它可以跟随页面活动！！！【坐在、趴在你的窗口上跟随窗口一起移动~~】
 
-我用的人物模型[Poly油灰](https://wwbvg.lanzoue.com/iBpmD3cx7gfc)
+:::
 
-![屏幕截图(1)](F:\Github项目\halei0v0\src\content\posts\post6【FXdownloader软件发布】 - 副本\屏幕截图(1).png)
+**我用的人物模型[Poly油灰](https://wwbvg.lanzoue.com/iBpmD3cx7gfc)**
 
-![屏幕截图(2)](F:\Github项目\halei0v0\src\content\posts\post6【FXdownloader软件发布】 - 副本\屏幕截图(2).png)
+![屏幕截图(1)](./屏幕截图(1).png)
+
+![屏幕截图(2)](./屏幕截图(2).png)
 
 【免费福瑞桌宠 nekowuwu的小土豆】https://www.bilibili.com/video/BV1MiUCBtEmf?vd_source=0957d3bb7550711acd815f905c37e537
 
