@@ -11,7 +11,7 @@ draft: false
 
 # Mate-Engine：打造属于你的开源桌面虚拟伙伴
 
-::github{repo="halei0v0shinyflvre/Mate-Engine"}
+::github{repo="shinyflvre/Mate-Engine"}
 
 > 打开电脑，一个可爱的虚拟角色在桌面上向你挥手，它能根据你的操作做出反应，陪你度过工作学习的每一刻——这不再是收费软件的专属，开源项目Mate-Engine将这一切变为现实。
 
@@ -25,15 +25,19 @@ draft: false
 
 :::
 
-**我用的人物模型[Poly油灰](https://wwbvg.lanzoue.com/iBpmD3cx7gfc)**
+**我用的人物模型**
 
-![屏幕截图(1)](./屏幕截图(1).png)
+**[Poly油灰](https://wwbvg.lanzoue.com/iBpmD3cx7gfc)**
 
-![屏幕截图(2)](./屏幕截图(2).png)
+**[Poly喵呜（小土豆）](https://wwxg.lanzoue.com/iDfrG3c1k6ad)**
+
+![屏幕截图(1)](https://cdn.jsdelivr.net/gh/halei0v0/warehouse@imgmd//imgmd/20251213104706557.png)
+
+![屏幕截图(2)](https://cdn.jsdelivr.net/gh/halei0v0/warehouse@imgmd//imgmd/20251213104734868.png)
 
 【免费福瑞桌宠 nekowuwu的小土豆】https://www.bilibili.com/video/BV1MiUCBtEmf?vd_source=0957d3bb7550711acd815f905c37e537
 
-<iframe src="//player.bilibili.com/player.html?isOutside=true&aid=115604631587702&bvid=BV1MiUCBtEmf&cid=34232403668&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+<iframe width="100%" height="468" src="//player.bilibili.com/player.html?isOutside=true&aid=115604631587702&bvid=BV1MiUCBtEmf&cid=34232403668&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
 
 ## 01 项目起源：当开源精神遇见虚拟陪伴
 

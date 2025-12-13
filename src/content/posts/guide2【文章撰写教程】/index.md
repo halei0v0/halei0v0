@@ -625,5 +625,16 @@ password: 'your-secret-password'
         H --> J
         I --> J
 ```
-```
+# 以下是图片测试
 
+**Github**图床图片
+
+![屏幕截图(1)](https://cdn.jsdelivr.net/gh/halei0v0/warehouse@imgmd//imgmd/20251213104931828.png)
+
+![屏幕截图(2)](https://cdn.jsdelivr.net/gh/halei0v0/warehouse@imgmd//imgmd/20251213104911178.png)
+
+**本地直接显示的图片**
+
+![屏幕截图](./屏幕截图(1).png)
+
+![屏幕截图](./屏幕截图(2).png)
