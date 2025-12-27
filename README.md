@@ -1,24 +1,22 @@
-# 🌸 Halei0v0's Mizuki  Blog
-![Node.js >= 20](https://img.shields.io/badge/node.js-%3E%3D20-brightgreen) 
-![pnpm >= 9](https://img.shields.io/badge/pnpm-%3E%3D9-blue) 
-![Astro](https://img.shields.io/badge/Astro-5.12.8-orange)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.9.2-blue)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+# 关于我
 
-![Blog](./README.jpeg)
+你好呀！我是**halei0v0**，一个热衷于开源项目和技术实践的开发者✨
 
-<table>
-  <tr>
-    <td><img alt="" src="docs/image/1.png"></td>
-    <td><img alt="" src="docs/image/2.png"></td>
-    <td><img alt="" src="docs/image/3.png"></td>
-  <tr>
-  <tr>
-    <td><img alt="" src="docs/image/4.png"></td>
-    <td><img alt="" src="docs/image/5.png"></td>
-    <td><img alt="" src="docs/image/6.png"></td>
-  <tr>
-</table>
----
+## 我的开源世界
 
-⭐ If you find this project helpful, please consider giving it a star!
+我在 GitHub 上维护着多个有趣的开源项目，每一个都承载着我的技术探索和实用需求：
+
+- **FXdownloader**：一款便捷的番茄小说下载工具，基于 Python 开发，帮你轻松获取心仪的小说内容
+- **H-CAT**：基于 Mizuki 打造的二次元猫猫（猫羽雫）主题博客模板，兼具萌系视觉与完整博客功能，为创作者提供个性化的内容展示平台
+- **blog**：我的博客总纲仓库，我的个人博客可访问[https://v-blog.halei0v0.top](https://v-blog.halei0v0.top/)，在这里会分享我的技术心得、项目经验和日常感悟
+- **halei0v0.github.io**：我的个人导航主页，用 HTML 搭建的轻量化导航入口，方便快速访问常用站点
+- **warehouse**：用于存储各类技术资源和项目备份的仓库，是我的线上 “资源收纳箱”
+
+## 我的技术足迹
+
+过去一年里，我保持着稳定的开源贡献节奏，在 FXdownloader 和个人导航主页两个仓库累计完成 12 次代码提交，同时新创建了 2 个独立仓库，持续拓展自己的技术版图。我擅长 Python 脚本开发和前端轻量化页面搭建，喜欢把日常需求转化为可用的工具和项目，也热衷于在开源社区中交流学习、沉淀经验。
+
+## 联系与交流
+
+如果你对我的项目感兴趣，或是有技术问题想要探讨，欢迎通过 GitHub 主页（https://github.com/halei0v0）找到我，期待和志同道合的开发者一起交流成长！
+
