@@ -1,7 +1,7 @@
 ---
 title: Aria2【Linux版本使用教程】
 published: 2026-02-03
-description: 关于磁力链接下载器Aria2是使用经验分享。
+description: 关于磁力链接下载器Aria2的使用经验分享。
 tags: [工具,Linux]
 category: 工具分享
 draft: false
