@@ -9,4 +9,8 @@ draft: false
 
 2026.02.18【机密航天】（247.8万）
 
-<img src="https://cdn.jsdelivr.net/gh/halei0v0/warehouse@imgmd//imgmd/20260218203631198.png" alt="image-20260218203317207"  />
+![截图1](https://cdn.jsdelivr.net/gh/halei0v0/warehouse@imgmd//imgmd/20260218203631198.png)
+
+2026.02.27【机密巴克什】（102.1万）（自从上次打完以后运气一直不怎么样）
+
+![截图2](https://cdn.jsdelivr.net/gh/halei0v0/warehouse@imgmd//imgmd/20260227202117249.png)
