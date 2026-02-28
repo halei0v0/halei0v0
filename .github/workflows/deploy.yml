@@ -30,7 +30,7 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 10.22.0
+          version: 9.14.4
           run_install: false
           
       - name: Install dependencies
@@ -43,9 +43,6 @@ jobs:
           # ENABLE_CONTENT_SYNC: true
           # CONTENT_REPO_URL: ${{ secrets.CONTENT_REPO_URL }}
           # USE_SUBMODULE: true
-          
-          # 其他环境变量
-          UMAMI_API_KEY: ${{ secrets.UMAMI_API_KEY }}
       
       - name: Deploy to pages branch
         uses: JamesIves/github-pages-deploy-action@v4
@@ -53,4 +50,3 @@ jobs:
           branch: pages # 部署到pages分支
           folder: dist # Astro默认构建输出目录
           clean: true # 清理目标分支中的旧文件
-

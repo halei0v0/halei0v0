@@ -1,11 +1,11 @@
 ---
-import type { GetStaticPaths } from "astro";
-import type { AlbumGroup } from "../../../data/1";
+import { siteConfig } from "../../../config";
 import I18nKey from "../../../i18n/i18nKey";
 import { i18n } from "../../../i18n/translation";
 import MainGridLayout from "../../../layouts/MainGridLayout.astro";
+// import type { GetStaticPaths } from "astro";
+import type { AlbumGroup, Photo } from "../../../types/album";
 import { scanAlbums } from "../../../utils/album-scanner";
-import { siteConfig } from "../../../config";
 
 // 检查相册页面是否启用
 if (!siteConfig.featurePages.albums) {
@@ -32,14 +32,14 @@ if (!album) {
 ---
 
 <MainGridLayout title={album.title} description={album.description || album.title}>
-  <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32">
+  <div class="flex w-full rounded-(--radius-large) overflow-hidden relative min-h-32">
     <div class="card-base z-10 px-9 py-6 relative w-full">
       
       <!-- 返回按钮 -->
       <div class="mb-6">
         <a 
           href="/albums/" 
-          class="inline-flex items-center gap-2 text-neutral-600 dark:text-neutral-400 hover:text-[var(--primary)] transition-colors"
+          class="inline-flex items-center gap-2 text-60 hover:text-(--primary) transition-colors"
         >
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
@@ -50,18 +50,18 @@ if (!album) {
 
       <!-- 相册标题信息 -->
       <header class="mb-8">
-        <h1 class="text-3xl font-bold text-neutral-900 dark:text-neutral-100 mb-3">
+        <h1 class="text-3xl font-bold text-90 mb-3">
           {album.title}
         </h1>
         
         {album.description && (
-          <p class="text-neutral-600 dark:text-neutral-400 mb-4">
+          <p class="text-60 mb-4">
             {album.description}
           </p>
         )}
         
         <!-- 相册元数据 -->
-        <div class="flex flex-wrap items-center gap-4 text-sm text-neutral-500 dark:text-neutral-500">
+        <div class="flex flex-wrap items-center gap-4 text-sm text-50">
           <span>{album.photos.length} {album.photos.length > 1 ? i18n(I18nKey.albumsPhotosCount) : i18n(I18nKey.albumsPhotoCount)}</span>
           <time>{new Date(album.date).toLocaleDateString('zh-CN')}</time>
           {album.location && (
@@ -77,7 +77,7 @@ if (!album) {
         <!-- 标签 -->
         {album.tags && album.tags.length > 0 && (
           <div class="flex flex-wrap gap-2 mt-4">
-            {album.tags.map(tag => (
+            {album.tags.map((tag: string) => (
               <span class="btn-regular h-8 text-sm px-3 rounded-lg">
                 {tag}
               </span>
@@ -88,17 +88,16 @@ if (!album) {
 
       <!-- 照片网格 -->
       <div 
-        class={`photo-gallery moment-images ${album.layout === 'masonry' ? 'masonry-layout' : 'grid-layout'}`}
+        class={`photo-gallery ${album.layout === 'masonry' ? 'masonry-layout' : 'grid-layout'}`}
         data-layout={album.layout || 'grid'}
         data-columns={album.columns || 3}
       >
-        {album.photos.map((photo, index) => (
+        {album.photos.map((photo: Photo, _index: number) => (
           <figure class="photo-item group relative overflow-hidden rounded-lg">
             <a 
               href="javascript:void(0)"
               data-src={photo.src}
-              data-fancybox="gallery"
-              data-caption={photo.title || photo.alt}
+              data-fancybox={`gallery-${_index}`}
               class="block"
             >
               <img 
@@ -106,6 +105,7 @@ if (!album) {
                 alt={photo.alt}
                 class="photo-image w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 cursor-pointer"
                 loading="lazy"
+                onload="this.removeAttribute('loading')"
               />
             </a>
           </figure>

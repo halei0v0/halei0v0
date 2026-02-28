@@ -1,6 +1,7 @@
 ---
 import type { MarkdownHeading } from "astro";
-import { siteConfig } from "../../config";
+
+// import { siteConfig } from "../../config";
 
 // import { url } from "../../utils/url-utils";
 
@@ -17,22 +18,21 @@ for (const heading of headings) {
 }
 
 const className = Astro.props.class;
-// 修复路由判断逻辑，确保在文章页面能正确显示TOC
-const isPostsRoute =
-	Astro.url.pathname.includes("/posts/") || headings.length > 0;
+// const isPostsRoute =
+// 	Astro.url.pathname.includes("/posts/") || headings.length > 0;
 
-const removeTailingHash = (text: string) => {
-	let lastIndexOfHash = text.lastIndexOf("#");
-	if (lastIndexOfHash !== text.length - 1) {
-		return text;
-	}
+// const removeTailingHash = (text: string) => {
+// 	let lastIndexOfHash = text.lastIndexOf("#");
+// 	if (lastIndexOfHash !== text.length - 1) {
+// 		return text;
+// 	}
+//
+// 	return text.substring(0, lastIndexOfHash);
+// };
 
-	return text.substring(0, lastIndexOfHash);
-};
+// let heading1Count = 1;
 
-let heading1Count = 1;
-
-const maxLevel = siteConfig.toc.depth;
+// const maxLevel = siteConfig.toc.depth;
 ---
 <table-of-contents class:list={[className, "group"]} id="toc">
     <!-- TOC内容将由JavaScript动态生成 -->
@@ -78,17 +78,23 @@ class TableOfContents extends HTMLElement {
         let i = this.active.length - 1;
         let min = this.active.length - 1, max = -1;
         while (i >= 0 && !this.active[i]) {
-            this.tocEntries[i].classList.remove(this.visibleClass);
+            if (this.tocEntries[i]) {
+                this.tocEntries[i].classList.remove(this.visibleClass);
+            }
             i--;
         }
         while (i >= 0 && this.active[i]) {
-            this.tocEntries[i].classList.add(this.visibleClass);
-            min = Math.min(min, i);
-            max = Math.max(max, i);
+            if (this.tocEntries[i]) {
+                this.tocEntries[i].classList.add(this.visibleClass);
+                min = Math.min(min, i);
+                max = Math.max(max, i);
+            }
             i--;
         }
         while (i >= 0) {
-            this.tocEntries[i].classList.remove(this.visibleClass);
+            if (this.tocEntries[i]) {
+                this.tocEntries[i].classList.remove(this.visibleClass);
+            }
             i--;
         }
         if (min > max) {
@@ -96,9 +102,13 @@ class TableOfContents extends HTMLElement {
         } else {
             let parentOffset = this.tocEl?.getBoundingClientRect().top || 0;
             let scrollOffset = this.tocEl?.scrollTop || 0;
-            let top = this.tocEntries[min].getBoundingClientRect().top - parentOffset + scrollOffset;
-            let bottom = this.tocEntries[max].getBoundingClientRect().bottom - parentOffset + scrollOffset;
-            this.activeIndicator?.setAttribute("style", `top: ${top}px; height: ${bottom - top}px`);
+            const minEntry = this.tocEntries[min];
+            const maxEntry = this.tocEntries[max];
+            if (minEntry && maxEntry) {
+                let top = minEntry.getBoundingClientRect().top - parentOffset + scrollOffset;
+                let bottom = maxEntry.getBoundingClientRect().bottom - parentOffset + scrollOffset;
+                this.activeIndicator?.setAttribute("style", `top: ${top}px; height: ${bottom - top}px`);
+            }
         }
     };
 
@@ -116,7 +126,7 @@ class TableOfContents extends HTMLElement {
         const bottommost = activeHeading[activeHeading.length - 1];
         const tocHeight = this.tocEl.clientHeight;
 
-        let top;
+        let top: number;
         if (bottommost.getBoundingClientRect().bottom -
             topmost.getBoundingClientRect().top < 0.9 * tocHeight)
             top = topmost.offsetTop - 32;
@@ -173,7 +183,7 @@ class TableOfContents extends HTMLElement {
             if (targetElement) {
                 // 计算目标位置，与移动端保持一致
                 const navbarHeight = 80; // 导航栏高度
-                const targetTop = targetElement.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
+                const targetTop = targetElement.getBoundingClientRect().top + window.scrollY - navbarHeight;
                 
                 // 使用与移动端相同的滚动方式
                 window.scrollTo({
@@ -263,6 +273,7 @@ class TableOfContents extends HTMLElement {
         if (!isPostPage) {
             // 如果不是文章页面，隐藏TOC
             this.innerHTML = '';
+            delete this.dataset.loaded;
             return;
         }
         // 从当前页面重新获取标题
@@ -280,6 +291,7 @@ class TableOfContents extends HTMLElement {
         }
         if (headings.length === 0) {
             this.innerHTML = '';
+            delete this.dataset.loaded;
             return;
         }
         // 重新生成TOC HTML
@@ -322,19 +334,20 @@ class TableOfContents extends HTMLElement {
                     }
                     heading1Count++;
                 } else if (heading.depth === minDepth + 1) {
-                    badgeContent = '<div class="transition w-2 h-2 rounded-[0.1875rem] bg-[var(--toc-badge-bg)]"></div>';
+                    badgeContent = '<div class="transition w-2 h-2 rounded-[0.1875rem] bg-(--toc-badge-bg)"></div>';
                 } else {
                     badgeContent = '<div class="transition w-1.5 h-1.5 rounded-sm bg-black/5 dark:bg-white/10"></div>';
                 }
                 
-                return `<a href="#${heading.slug}" class="px-2 flex gap-2 relative transition w-full min-h-9 rounded-xl hover:bg-[var(--toc-btn-hover)] active:bg-[var(--toc-btn-active)] py-2">
-                    <div class="transition w-5 h-5 shrink-0 rounded-lg text-xs flex items-center justify-center font-bold ${depthClass} ${heading.depth === minDepth ? 'bg-[var(--toc-badge-bg)] text-[var(--btn-content)]' : ''}">
+                return `<a href="#${heading.slug}" class="px-2 flex gap-2 relative transition w-full min-h-9 rounded-xl hover:bg-(--toc-btn-hover) active:bg-(--toc-btn-active) py-2">
+                    <div class="transition w-5 h-5 shrink-0 rounded-lg text-xs flex items-center justify-center font-bold ${depthClass} ${heading.depth === minDepth ? 'bg-(--toc-badge-bg) text-(--btn-content)' : ''}">
                         ${badgeContent}
                     </div>
                     <div class="transition text-sm ${heading.depth <= minDepth + 1 ? 'text-50' : 'text-30'}">${heading.text}</div>
                 </a>`;
             }).join('');
-        this.innerHTML = tocHTML + '<div id="active-indicator" style="opacity: 0" class="-z-10 absolute bg-[var(--toc-btn-hover)] left-0 right-0 rounded-xl transition-all group-hover:bg-transparent border-2 border-[var(--toc-btn-hover)] group-hover:border-[var(--toc-btn-active)] border-dashed"></div>';
+        this.innerHTML = tocHTML + '<div id="active-indicator" style="opacity: 0" class="-z-10 absolute bg-(--toc-btn-hover) left-0 right-0 rounded-xl transition-all group-hover:bg-transparent border-2 border-(--toc-btn-hover) group-hover:border-(--toc-btn-active) border-dashed"></div>';
+        this.dataset.loaded = "true";
     }
 
     disconnectedCallback() {

@@ -1,4 +1,10 @@
-import type { DARK_MODE, LIGHT_MODE, WALLPAPER_BANNER, WALLPAPER_FULLSCREEN, WALLPAPER_NONE } from "../constants/constants";
+import type {
+	DARK_MODE,
+	LIGHT_MODE,
+	WALLPAPER_BANNER,
+	WALLPAPER_FULLSCREEN,
+	WALLPAPER_NONE,
+} from "../constants/constants";
 
 export type SiteConfig = {
 	title: string;
@@ -7,8 +13,33 @@ export type SiteConfig = {
 	keywords?: string[]; // 站点关键词，用于生成 <meta name="keywords">
 	siteStartDate?: string; // 站点开始日期，格式：YYYY-MM-DD，用于计算运行天数
 
-	timeZone:|-12|-11|-10|-9|-8|-7|-6|-5|-4|-3|-2|-1|0|1|2|3|4|5|6|7|8|9|10|11|12;
-	
+	timeZone:
+		| -12
+		| -11
+		| -10
+		| -9
+		| -8
+		| -7
+		| -6
+		| -5
+		| -4
+		| -3
+		| -2
+		| -1
+		| 0
+		| 1
+		| 2
+		| 3
+		| 4
+		| 5
+		| 6
+		| 7
+		| 8
+		| 9
+		| 10
+		| 11
+		| 12;
+
 	lang:
 		| "en"
 		| "zh_CN"
@@ -46,8 +77,16 @@ export type SiteConfig = {
 
 	// 顶栏标题配置
 	navbarTitle?: {
+		mode?: "text-icon" | "logo"; // 显示模式："text-icon" 显示图标+文本，"logo" 仅显示Logo
 		text: string; // 顶栏标题文本
 		icon?: string; // 顶栏标题图标路径
+		logo?: string; // 网站Logo图片路径
+	};
+
+	// 页面自动缩放配置
+	pageScaling?: {
+		enable: boolean; // 是否开启自动缩放
+		targetWidth?: number; // 目标宽度，低于此宽度时开始缩放
 	};
 
 	// 添加字体配置
@@ -69,11 +108,20 @@ export type SiteConfig = {
 	// 添加bangumi配置
 	bangumi?: {
 		userId?: string; // Bangumi用户ID
+		fetchOnDev?: boolean;
+	};
+
+	// 添加bilibili配置
+	bilibili?: {
+		vmid?: string; // Bilibili用户ID (vmid)
+		fetchOnDev?: boolean; // 是否在开发环境下获取 Bilibili 数据
+		coverMirror?: string; // 封面图片镜像源（可选，默认为空字符串）
+		useWebp?: boolean; // 是否使用WebP格式（默认 true）
 	};
 
 	// 添加番剧页面配置
 	anime?: {
-		mode?: "bangumi" | "local"; // 番剧页面模式
+		mode?: "bangumi" | "local" | "bilibili"; // 番剧页面模式
 	};
 
 	// 标签样式配置
@@ -131,9 +179,11 @@ export type SiteConfig = {
 	};
 	toc: {
 		enable: boolean;
+		mode: "float" | "sidebar"; // 目录显示模式："float" 悬浮按钮模式，"sidebar" 侧边栏模式
 		depth: 1 | 2 | 3;
 		useJapaneseBadge?: boolean; // 使用日语假名标记（あいうえお...）代替数字
 	};
+	showCoverInContent: boolean; // 控制文章封面在文章内容页显示的开关
 	generateOgImages: boolean;
 	favicon: Favicon[];
 	showLastModified: boolean; // 控制“上次编辑”卡片显示的开关
@@ -152,7 +202,7 @@ export enum LinkPreset {
 	Friends = 3,
 	Anime = 4,
 	Diary = 5,
-	Gallery = 6,
+	Albums = 6,
 	Projects = 7,
 	Skills = 8,
 	Timeline = 9,
@@ -190,6 +240,33 @@ export type LicenseConfig = {
 	name: string;
 	url: string;
 };
+
+// Permalink 配置
+export type PermalinkConfig = {
+	enable: boolean; // 是否启用全局 permalink 功能
+	/**
+	 * permalink 格式模板
+	 * 支持的占位符：
+	 * - %year% : 4位年份 (2024)
+	 * - %monthnum% : 2位月份 (01-12)
+	 * - %day% : 2位日期 (01-31)
+	 * - %hour% : 2位小时 (00-23)
+	 * - %minute% : 2位分钟 (00-59)
+	 * - %second% : 2位秒数 (00-59)
+	 * - %post_id% : 文章序号（按发布时间升序排列）
+	 * - %postname% : 文章文件名（slug）
+	 * - %category% : 分类名（无分类时为 "uncategorized"）
+	 *
+	 * 示例：
+	 * - "%year%-%monthnum%-%postname%" => "2024-12-my-post"
+	 * - "%post_id%-%postname%" => "42-my-post"
+	 * - "%category%-%postname%" => "tech-my-post"
+	 *
+	 * 注意：不支持斜杠 "/"，所有生成的链接都在根目录下
+	 */
+	format: string;
+};
+
 // 评论配置
 
 export type CommentConfig = {
@@ -205,7 +282,10 @@ type TwikooConfig = {
 
 export type LIGHT_DARK_MODE = typeof LIGHT_MODE | typeof DARK_MODE;
 
-export type WALLPAPER_MODE = typeof WALLPAPER_BANNER | typeof WALLPAPER_FULLSCREEN | typeof WALLPAPER_NONE;
+export type WALLPAPER_MODE =
+	| typeof WALLPAPER_BANNER
+	| typeof WALLPAPER_FULLSCREEN
+	| typeof WALLPAPER_NONE;
 
 export type BlogPostData = {
 	body: string;
@@ -272,10 +352,7 @@ export type WidgetComponentType =
 
 export type WidgetComponentConfig = {
 	type: WidgetComponentType; // 组件类型
-	enable: boolean; // 是否启用该组件
-	order: number; // 显示顺序，数字越小越靠前
 	position: "top" | "sticky"; // 组件位置：顶部固定区域或粘性区域
-	sidebar?: "left" | "right"; // 组件所在侧边栏：左侧或右侧（仅当启用双侧边栏时有效）
 	class?: string; // 自定义CSS类名
 	style?: string; // 自定义内联样式
 	animationDelay?: number; // 动画延迟时间（毫秒）
@@ -287,8 +364,12 @@ export type WidgetComponentConfig = {
 };
 
 export type SidebarLayoutConfig = {
-	position: "unilateral" | "both"; // 侧边栏位置：单侧或双侧
-	components: WidgetComponentConfig[]; // 组件配置列表
+	properties: WidgetComponentConfig[]; // 组件配置列表
+	components: {
+		left: WidgetComponentType[];
+		right: WidgetComponentType[];
+		drawer: WidgetComponentType[];
+	};
 	defaultAnimation: {
 		enable: boolean; // 是否启用默认动画
 		baseDelay: number; // 基础延迟时间（毫秒）
@@ -299,11 +380,6 @@ export type SidebarLayoutConfig = {
 			mobile: number; // 移动端断点（px）
 			tablet: number; // 平板端断点（px）
 			desktop: number; // 桌面端断点（px）
-		};
-		layout: {
-			mobile: "hidden" | "bottom" | "drawer" | "sidebar"; // 移动端布局模式
-			tablet: "sidebar" | "bottom" | "drawer"; // 平板端布局模式
-			desktop: "sidebar"; // 桌面端布局模式
 		};
 	};
 };
@@ -377,4 +453,11 @@ export type PioConfig = {
 			text?: string; // 自定义文本
 		}>;
 	};
+};
+
+/**
+ * 分享组件配置
+ */
+export type ShareConfig = {
+	enable: boolean; // 是否启用分享功能
 };

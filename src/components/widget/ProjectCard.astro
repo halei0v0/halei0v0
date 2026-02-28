@@ -1,6 +1,6 @@
 ---
-import { i18n } from "../../i18n/translation";
 import I18nKey from "../../i18n/i18nKey";
+import { i18n } from "../../i18n/translation";
 
 export interface Props {
 	project: {
@@ -94,7 +94,7 @@ const sizeClasses = getSizeClasses(size);
 <div class="bg-transparent rounded-lg border border-black/10 dark:border-white/10 overflow-hidden hover:shadow-lg transition-all duration-300 group">
   <!-- 项目图片 -->
   {showImage && project.image && (
-    <div class={`overflow-hidden ${size === 'large' ? 'aspect-video' : 'aspect-[4/3]'}`}>
+    <div class={`overflow-hidden ${size === 'large' ? 'aspect-video' : 'aspect-4/3'}`}>
       <img 
         src={project.image} 
         alt={project.title}

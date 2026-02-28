@@ -12,14 +12,16 @@ const { id, data } = Astro.props.post;
 
 const slug = removeFileExtension(id);
 const path = `/posts/${slug}`;
-const url = `${Astro.site?.href}${path}`;
+// const url = `${Astro.site?.href}${path}`;
 
 let commentService = "";
 if (commentConfig?.enable && commentConfig?.twikoo) {
 	commentService = "twikoo";
 }
+
+const commentEnabled = data.comment ?? true;
 ---
-{commentConfig?.enable && (
+{commentConfig?.enable && commentEnabled && (
   <div class="card-base p-6 mb-4">
     {commentService === 'twikoo' && <Twikoo path={path} />}
     {commentService === '' && null}

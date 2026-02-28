@@ -17,19 +17,19 @@ const albumsData = await scanAlbums();
 <MainGridLayout title={i18n(I18nKey.albums)} description={i18n(I18nKey.albumsSubtitle)}>
     <!-- 引入右侧边栏布局管理器 -->
   <script>
-    import('/src/scripts/right-sidebar-layout.js');
+    import('../scripts/right-sidebar-layout.js');
   </script>
-  <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32">
+  <div class="flex w-full rounded-(--radius-large) overflow-hidden relative min-h-32">
     <div class="card-base z-10 px-9 py-6 relative w-full">
       
       <!-- 页面标题 -->
       <header class="mb-8">
-        <h1 class="text-3xl font-bold text-neutral-900 dark:text-neutral-100 mb-3 relative
-                  before:w-1 before:h-8 before:rounded-md before:bg-[var(--primary)]
+        <h1 class="text-3xl font-bold text-90 mb-3 relative
+                  before:w-1 before:h-8 before:rounded-md before:bg-(--primary)
                   before:absolute before:top-1/2 before:-translate-y-1/2 before:-left-4">
           {i18n(I18nKey.albums)}
         </h1>
-        <p class="text-neutral-600 dark:text-neutral-400">
+        <p class="text-60">
           {i18n(I18nKey.albumsSubtitle)}
         </p>
       </header>
@@ -38,11 +38,11 @@ const albumsData = await scanAlbums();
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {albumsData.map(album => (
           <article 
-            class="album-card group bg-white dark:bg-neutral-900 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 border border-neutral-200 dark:border-neutral-800"
+            class="album-card group bg-(--card-bg) rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 border border-(--line-divider)"
           >
             <a href={`/albums/${album.id}/`} class="block">
               <!-- 封面图片 -->
-              <div class="aspect-[4/3] overflow-hidden bg-neutral-100 dark:bg-neutral-700">
+              <div class="aspect-4/3 overflow-hidden bg-black/5 dark:bg-white/5">
                 <img 
                   src={album.cover} 
                   alt={album.title}
@@ -53,18 +53,18 @@ const albumsData = await scanAlbums();
               
               <!-- 相册信息 -->
               <div class="p-4">
-                <h3 class="font-bold text-lg text-neutral-900 dark:text-neutral-100 mb-2 group-hover:text-[var(--primary)] transition-colors">
+                <h3 class="font-bold text-lg text-90 mb-2 group-hover:text-(--primary) transition-colors">
                   {album.title}
                 </h3>
                 
                 {album.description && (
-                  <p class="text-neutral-600 dark:text-neutral-400 text-sm mb-3 line-clamp-2">
+                  <p class="text-60 text-sm mb-3 line-clamp-2">
                     {album.description}
                   </p>
                 )}
                 
                 <!-- 元数据 -->
-                <div class="flex items-center justify-between text-xs text-neutral-500 dark:text-neutral-500">
+                <div class="flex items-center justify-between text-xs text-50">
                   <div class="flex items-center gap-4">
                     <span>{album.photos.length} {album.photos.length > 1 ? i18n(I18nKey.albumsPhotosCount) : i18n(I18nKey.albumsPhotoCount)}</span>
                     {album.location && (
@@ -103,15 +103,15 @@ const albumsData = await scanAlbums();
       <!-- 空状态 -->
       {albumsData.length === 0 && (
         <div class="text-center py-12">
-          <div class="text-neutral-400 dark:text-neutral-600 mb-4">
+          <div class="text-50 mb-4">
             <svg class="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
             </svg>
           </div>
-          <h3 class="text-lg font-medium text-neutral-900 dark:text-neutral-100 mb-2">
+          <h3 class="text-lg font-medium text-90 mb-2">
             {i18n(I18nKey.albumsEmpty)}
           </h3>
-          <p class="text-neutral-600 dark:text-neutral-400">
+          <p class="text-60">
             {i18n(I18nKey.albumsEmptyDesc)}
           </p>
         </div>

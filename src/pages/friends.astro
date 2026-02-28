@@ -1,9 +1,9 @@
 ---
 import { getEntry, render } from "astro:content";
 import Markdown from "@components/misc/Markdown.astro";
-import Icon from "../components/misc/Icon.astro";
+// import Icon from "../components/misc/Icon.astro";
 import { siteConfig } from "../config";
-import { getFriendsList, getShuffledFriendsList } from "../data/friends";
+import { getShuffledFriendsList } from "../data/friends";
 import I18nKey from "../i18n/i18nKey";
 import { i18n } from "../i18n/translation";
 import MainGridLayout from "../layouts/MainGridLayout.astro";
@@ -33,18 +33,18 @@ const allTags = Array.from(new Set(friendsList.flatMap((item) => item.tags)));
 		window.isFriendsPage = true;
 	</script>
   <script>
-    import('/src/scripts/right-sidebar-layout.js');
+    import('../scripts/right-sidebar-layout.js');
   </script>
-	<div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32">
+	<div class="flex w-full rounded-(--radius-large) overflow-hidden relative min-h-32">
 		<div class="card-base z-10 px-9 py-6 relative w-full">
       <!-- 页面标题 -->
       <div class="flex flex-col items-start justify-center mb-8">
-        <h1 class="text-4xl font-bold text-black/90 dark:text-white/90 mb-2 relative
-                  before:w-1 before:h-8 before:rounded-md before:bg-[var(--primary)]
+        <h1 class="text-4xl font-bold text-90 mb-2 relative
+                  before:w-1 before:h-8 before:rounded-md before:bg-(--primary)
                   before:absolute before:top-1/2 before:-translate-y-1/2 before:-left-4">
           {i18n(I18nKey.friends)}
         </h1>
-        <p class="text-lg text-black/60 dark:text-white/60">
+        <p class="text-lg text-60">
           {i18n(I18nKey.friendsSubtitle)}
         </p>
 			</div>
@@ -58,13 +58,13 @@ const allTags = Array.from(new Set(friendsList.flatMap((item) => item.tags)));
 							type="text" 
 							id="friend-search"
 							placeholder={i18n(I18nKey.friendsSearchPlaceholder)}
-							class="w-full px-4 py-2 pl-10 rounded-lg bg-[var(--btn-regular-bg)] 
-									text-black/90 dark:text-white/90
-									border border-black/10 dark:border-white/10
-									focus:outline-none focus:ring-2 focus:ring-[var(--primary)]/50
+							class="w-full px-4 py-2 pl-10 rounded-lg bg-(--btn-regular-bg) 
+									text-90
+									border border-(--line-divider)
+									focus:outline-none focus:ring-2 focus:ring-(--primary)/50
 									transition-all duration-200"
 						/>
-						<svg class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-black/40 dark:text-white/40" 
+						<svg class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-50" 
 							 fill="none" stroke="currentColor" viewBox="0 0 24 24">
 							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
 								d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
@@ -95,7 +95,7 @@ const allTags = Array.from(new Set(friendsList.flatMap((item) => item.tags)));
 			<div id="friends-grid" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 mb-6">
 				{friendsList.map((item) => (
 					<div 
-						class="friend-card group relative bg-transparent rounded-xl border border-black/10 dark:border-white/10
+						class="friend-card group relative bg-transparent rounded-xl border border-(--line-divider)
 								 overflow-hidden transition-all duration-300
 								 hover:shadow-xl hover:-translate-y-1"
 						data-title={item.title.toLowerCase()}
@@ -107,8 +107,8 @@ const allTags = Array.from(new Set(friendsList.flatMap((item) => item.tags)));
 							<!-- 头像和标题区 -->
 							<div class="flex items-start gap-4 mb-4">
 								<!-- 网站图标 -->
-								<div class="w-16 h-16 flex-shrink-0 rounded-xl overflow-hidden 
-												bg-[var(--btn-regular-bg)] 
+								<div class="w-16 h-16 shrink-0 rounded-xl overflow-hidden 
+												bg-(--btn-regular-bg) 
 												ring-2 ring-transparent
 												transition-all duration-300">
 									<img 
@@ -121,15 +121,15 @@ const allTags = Array.from(new Set(friendsList.flatMap((item) => item.tags)));
 
 								<!-- 标题和链接 -->
 								<div class="flex-1 min-w-0">
-									<h3 class="text-xl font-bold text-black/90 dark:text-white/90 mb-1 truncate
-												 group-hover:text-[var(--primary)] transition-colors duration-200">
+									<h3 class="text-xl font-bold text-90 mb-1 truncate
+												 group-hover:text-(--primary) transition-colors duration-200">
 										{item.title}
 									</h3>
 									<a 
 										href={item.siteurl} 
 										target="_blank" 
 										rel="noopener noreferrer"
-										class="text-xs text-black/50 dark:text-white/50 hover:text-[var(--primary)] 
+										class="text-xs text-50 hover:text-(--primary) 
 												 truncate block transition-colors duration-200"
 									>
 										{new URL(item.siteurl).hostname}
@@ -138,7 +138,7 @@ const allTags = Array.from(new Set(friendsList.flatMap((item) => item.tags)));
 							</div>
 
 							<!-- 描述 -->
-							<p class="text-sm text-black/60 dark:text-white/60 mb-4 line-clamp-2 min-h-[2.5rem]">
+							<p class="text-sm text-60 mb-4 line-clamp-2 min-h-10">
 								{item.desc}
 							</p>
 
@@ -146,7 +146,7 @@ const allTags = Array.from(new Set(friendsList.flatMap((item) => item.tags)));
 							<div class="flex flex-wrap gap-2 mb-4">
 								{item.tags.map(tag => (
 									<span class="px-2 py-1 text-xs rounded-md 
-													bg-[var(--primary)]/10 text-[var(--primary)] 
+													bg-(--primary)/10 text-(--primary) 
 													font-medium">
 										{tag}
 									</span>
@@ -160,8 +160,8 @@ const allTags = Array.from(new Set(friendsList.flatMap((item) => item.tags)));
 									target="_blank"
 									rel="noopener noreferrer"
 									class="flex-1 flex items-center justify-center gap-2 px-4 py-2 
-											 rounded-lg bg-[var(--primary)] text-white 
-											 hover:bg-[var(--primary)]/90 
+											 rounded-lg bg-(--primary) text-white 
+											 hover:bg-(--primary)/90 
 											 active:scale-95 transition-all duration-200
 											 font-medium text-sm"
 								>
@@ -173,10 +173,10 @@ const allTags = Array.from(new Set(friendsList.flatMap((item) => item.tags)));
 								</a>
 								<button 
 									class="copy-link-btn px-3 py-2 rounded-lg 
-											 bg-[var(--btn-regular-bg)] 
-											 hover:bg-[var(--btn-regular-bg-hover)] 
+											 bg-(--btn-regular-bg) 
+											 hover:bg-(--btn-regular-bg-hover) 
 											 active:scale-95 transition-all duration-200
-											 text-black/70 dark:text-white/70"
+											 text-70"
 									data-url={item.siteurl}
 									title={i18n(I18nKey.friendsCopyLink)}
 								>
@@ -189,7 +189,7 @@ const allTags = Array.from(new Set(friendsList.flatMap((item) => item.tags)));
 						</div>
 
 						<!-- 悬停装饰效果 -->
-						<div class="absolute inset-0 bg-gradient-to-br from-[var(--primary)]/5 to-transparent 
+						<div class="absolute inset-0 bg-linear-to-br from-(--primary)/5 to-transparent 
 										opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
 						</div>
 					</div>

@@ -3,36 +3,44 @@ import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import Icon from "@iconify/svelte";
 import { getDefaultHue, getHue, setHue } from "@utils/setting-utils";
+import { onMount } from "svelte";
 
-let hue = getHue();
-const defaultHue = getDefaultHue();
+let hue = 250;
+let defaultHue = 250;
+let isMounted = false;
 
 function resetHue() {
-	hue = getDefaultHue();
+	hue = defaultHue;
 }
 
-$: if (hue || hue === 0) {
+onMount(() => {
+	isMounted = true;
+	defaultHue = getDefaultHue();
+	hue = getHue();
+});
+
+$: if (isMounted && (hue || hue === 0)) {
 	setHue(hue);
 }
 </script>
 
 <div id="display-setting" class="float-panel float-panel-closed absolute transition-all w-80 right-4 px-4 py-4">
     <div class="flex flex-row gap-2 mb-3 items-center justify-between">
-        <div class="flex gap-2 font-bold text-lg text-neutral-900 dark:text-neutral-100 transition relative ml-3
-            before:w-1 before:h-4 before:rounded-md before:bg-[var(--primary)]
+        <div class="flex gap-2 font-bold text-lg text-90 transition relative ml-3
+            before:w-1 before:h-4 before:rounded-md before:bg-(--primary)
             before:absolute before:-left-3 before:top-[0.33rem]"
         >
             {i18n(I18nKey.themeColor)}
             <button aria-label="Reset to Default" class="btn-regular w-7 h-7 rounded-md  active:scale-90"
                     class:opacity-0={hue === defaultHue} class:pointer-events-none={hue === defaultHue} on:click={resetHue}>
-                <div class="text-[var(--btn-content)]">
-                    <Icon icon="fa6-solid:arrow-rotate-left" class="text-[0.875rem]"></Icon>
+                <div class="text-(--btn-content)">
+                    <Icon icon="fa7-solid:arrow-rotate-left" class="text-[0.875rem]"></Icon>
                 </div>
             </button>
         </div>
         <div class="flex gap-1">
-            <div id="hueValue" class="transition bg-[var(--btn-regular-bg)] w-10 h-7 rounded-md flex justify-center
-            font-bold text-sm items-center text-[var(--btn-content)]">
+            <div id="hueValue" class="transition bg-(--btn-regular-bg) w-10 h-7 rounded-md flex justify-center
+            font-bold text-sm items-center text-(--btn-content)">
                 {hue}
             </div>
         </div>

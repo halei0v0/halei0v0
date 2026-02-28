@@ -1,5 +1,4 @@
 ---
-import { getCollection } from "astro:content";
 import { siteConfig } from "../config";
 import { UNCATEGORIZED } from "../constants/constants";
 import {
@@ -12,19 +11,20 @@ import {
 import I18nKey from "../i18n/i18nKey";
 import { i18n } from "../i18n/translation";
 import MainGridLayout from "../layouts/MainGridLayout.astro";
-import { loadIconify } from "../utils/icon-loader";
+
+// import { loadIconify } from "../utils/icon-loader";
 
 // 检查项目页面是否启用
 if (!siteConfig.featurePages.projects) {
 	return Astro.redirect("/404/");
 }
 
-const { lang } = Astro.props;
+// const { lang } = Astro.props;
 
-// 加载Iconify图标库
-loadIconify().catch((error) => {
-	console.error("Failed to load Iconify:", error);
-});
+// 加载Iconify图标库 - 移至客户端执行
+// loadIconify().catch((error) => {
+// 	console.error("Failed to load Iconify:", error);
+// });
 
 // 获取项目统计信息
 const stats = getProjectStats();
@@ -70,18 +70,24 @@ const getCategoryText = (category: string) => {
 <MainGridLayout title={title} description={subtitle}>
   <!-- 引入右侧边栏布局管理器 -->
   <script>
-    import('/src/scripts/right-sidebar-layout.js');
+    import('../scripts/right-sidebar-layout.js');
+    import { loadIconify } from "../utils/icon-loader";
+    
+    // 加载Iconify图标库
+    loadIconify().catch((error) => {
+      console.error("Failed to load Iconify:", error);
+    });
   </script>
-  <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32">
+  <div class="flex w-full rounded-(--radius-large) overflow-hidden relative min-h-32">
     <div class="card-base z-10 px-9 py-6 relative w-full">
       <!-- 页面标题 -->
       <div class="flex flex-col items-start justify-center mb-8">
-        <h1 class="text-4xl font-bold text-black/90 dark:text-white/90 mb-2 relative
-                  before:w-1 before:h-8 before:rounded-md before:bg-[var(--primary)]
+        <h1 class="text-4xl font-bold text-90 mb-2 relative
+                  before:w-1 before:h-8 before:rounded-md before:bg-(--primary)
                   before:absolute before:top-1/2 before:-translate-y-1/2 before:-left-4">
           {i18n(I18nKey.projects)}
         </h1>
-        <p class="text-lg text-black/60 dark:text-white/60">
+        <p class="text-lg text-60">
           {i18n(I18nKey.projectsSubtitle)}
         </p>
       </div>
@@ -109,14 +115,14 @@ const getCategoryText = (category: string) => {
       <!-- 特色项目 -->
       {featuredProjects.length > 0 && (
         <div class="mb-8">
-          <h2 class="text-2xl font-bold text-black/90 dark:text-white/90 mb-4 relative
-                    before:w-1 before:h-6 before:rounded-md before:bg-[var(--primary)]
+          <h2 class="text-2xl font-bold text-90 mb-4 relative
+                    before:w-1 before:h-6 before:rounded-md before:bg-(--primary)
                     before:absolute before:top-1/2 before:-translate-y-1/2 before:-left-4">
             {i18n(I18nKey.projectsFeatured)}
           </h2>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             {featuredProjects.map((project) => (
-              <div class="bg-transparent rounded-lg border border-black/10 dark:border-white/10 overflow-hidden hover:shadow-lg transition-shadow duration-300">
+              <div class="bg-transparent rounded-lg border border-(--line-divider) overflow-hidden hover:shadow-lg transition-shadow duration-300">
                 {project.image && (
                   <div class="aspect-video overflow-hidden">
                     <img 
@@ -128,7 +134,7 @@ const getCategoryText = (category: string) => {
                 )}
                 <div class="p-6">
                   <div class="flex items-start justify-between mb-3">
-                    <h3 class="text-xl font-semibold text-black/90 dark:text-white/90">
+                    <h3 class="text-xl font-semibold text-90">
                       {project.title}
                     </h3>
                     <span class={`px-2 py-1 text-xs rounded-full ${
@@ -143,7 +149,7 @@ const getCategoryText = (category: string) => {
                             I18nKey.projectsPlanned)}
                     </span>
                   </div>
-                  <p class="text-black/60 dark:text-white/60 mb-4 line-clamp-2">
+                  <p class="text-60 mb-4 line-clamp-2">
                     {project.description}
                   </p>
                   <div class="flex flex-wrap gap-2 mb-4">
@@ -197,17 +203,17 @@ const getCategoryText = (category: string) => {
           
           return (
             <div>
-              <h2 class="text-2xl font-bold text-black/90 dark:text-white/90 mb-4 relative
-                        before:w-1 before:h-6 before:rounded-md before:bg-[var(--primary)]
+              <h2 class="text-2xl font-bold text-90 mb-4 relative
+                        before:w-1 before:h-6 before:rounded-md before:bg-(--primary)
                         before:absolute before:top-1/2 before:-translate-y-1/2 before:-left-4">
                 {getCategoryText(category)}
-                <span class="text-lg font-normal text-black/60 dark:text-white/60 ml-2">
+                <span class="text-lg font-normal text-60 ml-2">
                   ({categoryProjects.length})
                 </span>
               </h2>
               <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {categoryProjects.map((project) => (
-                  <div class="bg-transparent rounded-lg border border-black/10 dark:border-white/10 overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                  <div class="bg-transparent rounded-lg border border-(--line-divider) overflow-hidden hover:shadow-lg transition-shadow duration-300">
                     {project.image && (
                       <div class="aspect-video overflow-hidden">
                         <img 
@@ -219,7 +225,7 @@ const getCategoryText = (category: string) => {
                     )}
                     <div class="p-4">
                       <div class="flex items-start justify-between mb-2">
-                        <h3 class="text-lg font-semibold text-black/90 dark:text-white/90 line-clamp-1">
+                        <h3 class="text-lg font-semibold text-90 line-clamp-1">
                           {project.title}
                         </h3>
                         <span class={`px-2 py-1 text-xs rounded-full shrink-0 ml-2 ${
@@ -234,7 +240,7 @@ const getCategoryText = (category: string) => {
                                 I18nKey.projectsPlanned)}
                         </span>
                       </div>
-                      <p class="text-black/60 dark:text-white/60 mb-3 text-sm line-clamp-2">
+                      <p class="text-60 mb-3 text-sm line-clamp-2">
                         {project.description}
                       </p>
                       <div class="flex flex-wrap gap-1 mb-3">
@@ -283,13 +289,13 @@ const getCategoryText = (category: string) => {
       </div>
 
       <!-- 技术栈统计 -->
-      <div class="mt-12 pt-8 border-t border-black/10 dark:border-white/10">
-        <h2 class="text-2xl font-bold text-black/90 dark:text-white/90 mb-4">
+      <div class="mt-12 pt-8 border-t border-(--line-divider)">
+        <h2 class="text-2xl font-bold text-90 mb-4">
           {i18n(I18nKey.projectsTechStack)}
         </h2>
         <div class="flex flex-wrap gap-2">
           {allTechStack.map((tech) => (
-            <span class="px-3 py-1 text-sm bg-gray-600/20 text-gray-700 dark:bg-gray-800 dark:text-gray-300 rounded-full">
+            <span class="px-3 py-1 text-sm bg-gray-600/20 text-70 dark:bg-gray-800 rounded-full">
               {tech}
             </span>
           ))}
