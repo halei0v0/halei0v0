@@ -10,6 +10,7 @@ import icon from "astro-icon";
 import { umami } from "oddmisc";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeComponents from "rehype-components";
+import rehypeExternalLinks from "rehype-external-links";
 import rehypeKatex from "rehype-katex";
 import rehypeSlug from "rehype-slug";
 import remarkDirective from "remark-directive";
@@ -132,6 +133,13 @@ export default defineConfig({
 			rehypeWrapTable,
 			rehypeMermaid,
 			rehypeImageWidth,
+			[
+				rehypeExternalLinks,
+				{
+					target: "_blank",
+					rel: ["nofollow", "noopener", "noreferrer"],
+				},
+			],
 			[
 				rehypeComponents,
 				{
