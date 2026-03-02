@@ -39,6 +39,15 @@ export const friendsData: FriendItem[] = [
 		siteurl: "https://halei0v0.github.io/blog",
 		tags: ["Blog"],
 	},
+	{
+		id: 4,
+		title: "THW’s Blog",
+		imgurl:
+			"https://image.tianhw.top/avatar.webp",
+		desc: "前途似海，来日方长",
+		siteurl: "https://blog.tianhw.top",
+		tags: ["Blog"],
+	},
 ];
 
 // 获取所有友情链接数据

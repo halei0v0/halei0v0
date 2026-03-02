@@ -259,19 +259,20 @@ export const fullscreenWallpaperConfig: FullscreenWallpaperConfig = {
 			"/assets/desktop-banner/cat (2).png",
 			"/assets/desktop-banner/cat (3).png",
 			"/assets/desktop-banner/cat (4).png",
-			"/assets/desktop-banner/cat (5).png",
-			"/assets/desktop-banner/cat (6).png",
+			//"/assets/desktop-banner/cat (5).png",
+			//"/assets/desktop-banner/cat (6).png",		        
 			"/assets/desktop-banner/cat (7).png",
 			"/assets/desktop-banner/cat (8).png",
 			"/assets/desktop-banner/cat (9).png",
+			"https://picture.tianhw.top/api/random?type=pc",
 		], // 桌面横幅图片
 		mobile: [
-			"/assets/mobile-banner/cat (1).jpg",
+			//"/assets/mobile-banner/cat (1).jpg",
 			"/assets/mobile-banner/cat (1).png",
-			"/assets/mobile-banner/cat (2).jpg",
+			//"/assets/mobile-banner/cat (2).jpg",
 			"/assets/mobile-banner/cat (2).png",
 			"/assets/mobile-banner/cat (3).jpg",
-			"/assets/mobile-banner/cat (3).png",
+		    //"/assets/mobile-banner/cat (3).png",
 			"/assets/mobile-banner/cat (4).png",
 			"/assets/mobile-banner/cat (5).png",
 			"/assets/mobile-banner/cat (6).png",
@@ -289,8 +290,9 @@ export const fullscreenWallpaperConfig: FullscreenWallpaperConfig = {
 			"/assets/mobile-banner/cat (15).png",
 			"/assets/mobile-banner/cat (16).png",
 			"/assets/mobile-banner/cat (17).png",
-			"/assets/mobile-banner/cat (18).png",
+		    //"/assets/mobile-banner/cat (18).png",
 			"/assets/mobile-banner/cat (19).png",
+			"https://picture.tianhw.top/api/random?type=mobile",
 		], // 移动横幅图片
 	}, // 使用本地横幅图片
 	position: "center", // 壁纸位置，等同于 object-position
