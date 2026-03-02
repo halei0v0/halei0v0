@@ -123,19 +123,20 @@ export const siteConfig: SiteConfig = {
 				"/assets/desktop-banner/cat (2).png",
 				"/assets/desktop-banner/cat (3).png",
 				"/assets/desktop-banner/cat (4).png",
-				"/assets/desktop-banner/cat (5).png",
-				"/assets/desktop-banner/cat (6).png",
+				//"/assets/desktop-banner/cat (5).png",
+		        //"/assets/desktop-banner/cat (6).png",
 				"/assets/desktop-banner/cat (7).png",
 				"/assets/desktop-banner/cat (8).png",
 				"/assets/desktop-banner/cat (9).png",
+				"https://picture.tianhw.top/api/random?type=pc",
 			], // 桌面横幅图片
 			mobile: [
-				"/assets/mobile-banner/cat (1).jpg",
+			    //"/assets/mobile-banner/cat (1).jpg",
 				"/assets/mobile-banner/cat (1).png",
-				"/assets/mobile-banner/cat (2).jpg",
+				//"/assets/mobile-banner/cat (2).jpg",
 				"/assets/mobile-banner/cat (2).png",
 				"/assets/mobile-banner/cat (3).jpg",
-				"/assets/mobile-banner/cat (3).png",
+		        //"/assets/mobile-banner/cat (3).png",
 				"/assets/mobile-banner/cat (4).png",
 				"/assets/mobile-banner/cat (5).png",
 				"/assets/mobile-banner/cat (6).png",
@@ -153,8 +154,9 @@ export const siteConfig: SiteConfig = {
 				"/assets/mobile-banner/cat (15).png",
 				"/assets/mobile-banner/cat (16).png",
 				"/assets/mobile-banner/cat (17).png",
-				"/assets/mobile-banner/cat (18).png",
+			    //"/assets/mobile-banner/cat (18).png",
 				"/assets/mobile-banner/cat (19).png",
+				"https://picture.tianhw.top/api/random?type=mobile",
 			], // 移动横幅图片
 		}, // 使用本地横幅图片
 
@@ -174,7 +176,7 @@ export const siteConfig: SiteConfig = {
 		// PicFlow API支持(智能图片API)
 		imageApi: {
 			enable: false, // 启用图片API
-			url: "http://domain.com/api_v2.php?format=text&count=4", // API地址，返回每行一个图片链接的文本
+			url: "https://picture.tianhw.top/api/random", // API地址，返回每行一个图片链接的文本
 		},
 		// 这里需要使用PicFlow API的Text返回类型,所以我们需要format=text参数
 		// 项目地址:https://github.com/matsuzaka-yuki/PicFlow-API

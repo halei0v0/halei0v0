@@ -3,6 +3,7 @@ title: 英文菜单
 published: 2026-02-28
 description: 【请输入密码进入】【我的作业啦，不要看！】
 tags: [密码]
+image: "https://picture.tianhw.top/images/27.webp"
 category: 密码
 encrypted: true
 password: 'wsj2024'

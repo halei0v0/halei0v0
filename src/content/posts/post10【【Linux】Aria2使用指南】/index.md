@@ -4,6 +4,7 @@ published: 2026-02-03
 description: 关于磁力链接下载器Aria2的使用经验分享。
 tags: [工具,Linux]
 category: 工具分享
+image: "https://n.sinaimg.cn/sinakd20201124s/224/w512h512/20201124/b36e-kefmphe2201724.png"
 draft: false
 ---
 

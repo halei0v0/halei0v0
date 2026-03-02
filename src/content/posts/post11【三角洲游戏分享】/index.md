@@ -4,6 +4,7 @@ published: 2026-02-18
 description: 关于三角洲的游玩截图分享。
 tags: [游戏,三角洲]
 category: 工具分享
+image: "https://picture.tianhw.top/images/779.webp"
 draft: false
 ---
 
