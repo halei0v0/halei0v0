@@ -1,102 +1,48 @@
-# About This Site
+<div align="center">
 
-::github{repo="halei0v0/blog"}
 
-## 🌟 主题特色
+  <img src="https://blog.halei0v0.dpdns.org/_astro/avatar.LShDDjOr_t8kMR.webp" width="150" height="150" alt="Profile Avatar" style="border-radius: 50%; margin-top: 20px; margin-bottom: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" />
 
-### 🎨 设计与用户体验
+  # Hi, I'm Halei0v0 👋
 
-- **现代典雅设计**：界面简洁简约，排版美观大方
-- **全响应式**：针对从手机到桌面端的所有设备进行优化
-- **深色 / 浅色模式**：支持自动切换主题，过渡效果流畅
-- **美观排版**：采用 JetBrains Mono 字体，提升文字可读性
-- **流畅动画**：页面过渡自然，交互元素动效流畅
+ <a href="https://git.io/typing-svg">
+    <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=22&duration=3000&pause=500&color=2F80ED&center=true&vCenter=true&width=600&lines=Hello%2C+I'm+Halei0v0!;Frontend+Developer+%26+High+School+Coder;Building+cool+things+with+code;Love+Astro%2C+TypeScript%2C+and+Open+Source;Currently+learning+AI+and+Web+Infra" alt="Typing SVG" />
+  </a>
 
-### 🔍 内容与搜索
+</div>
 
-- **高级搜索**：由[Pagefind](https://pagefind.app/)提供技术支持，搜索结果快速、精准
-- **增强型 Markdown**：扩展语法支持，包含代码高亮与数学公式功能
-- **交互式目录**：长文章支持自动滚动导航，阅读体验更佳
-- **RSS 订阅源生成**：自动生成订阅源，助你及时获取内容更新
-- **阅读时长预估**：提前告知每篇文章的大致阅读时间
-- **文章分类**：通过标签与分类体系，轻松整理内容
+## My Blog：
 
-### 📱 特色页面
+[哈雷0V0的博客 | Halei0v0's Biog](blog.halei0v0.dpdns.org)
 
-- **动漫追更页面**：记录动漫观看进度，并可添加评分
-- **友情链接页面**：以精美卡片形式展示好友网站
-- **日记 / 动态页面**：像社交媒体动态一样，分享生活点滴
-- **归档页面**：以时间线形式有序呈现所有文章
-- **关于页面**：可自定义的个人介绍页面（即当前页面！）
+::github{repo="halei0v0/halei0v0.github.io"}
 
-### 🛠 技术特色
+## About:
 
-- **增强型代码块**：由[Expressive Code](https://expressive-code.com/)提供技术支持
-- **数学公式支持**：通过 KaTeX 渲染 LaTeX 数学表达式
-- **图片优化**：采用 PhotoSwipe 图片画廊，支持延迟加载
-- **SEO 优化**：内置站点地图与元标签，提升搜索可见度
-- **性能优化**：通过缓存与优化技术，实现页面快速加载
-- **支持评论系统**：可集成 Twikoo 评论功能
+![GitHub Streak](https://streak-stats.demolab.com/?user=halei0v0)
 
-### 🎯 增强型 Markdown 特色
-
-- **提示框与警示框**：通过 `> [!NOTE]`、`> [!TIP]`、`> [!WARNING]` 语法，生成美观的信息提示框
-- **数学公式**：使用 `$行内公式$` 与 `$$块级公式$$` 语法，编写 LaTeX 数学公式
-- **GitHub 仓库卡片**：通过 `::github{repo="user/repo"}` 语法，嵌入 GitHub 仓库卡片
-- **语法高亮**：支持显示行号的高级代码高亮功能
-- **代码复制按钮**：配备便捷的代码一键复制功能
-
-------
-
-*基于 Astro-Mizuki模版构建，灵感源自现代网页设计理念，饱含心意打造。*
-
-# 【EN】以下是关于Mizuki模版
-
-## This website is built with the **Astro** framework using the [Mizuki](https://github.com/matsuzaka-yuki/mizuki) theme.
-
-::github{repo="matsuzaka-yuki/Mizuki"}
-
-## 🌟 Theme Features
-
-### 🎨 Design & User Experience
-- **Modern & Elegant Design** - Clean, minimalist interface with beautiful typography
-- **Fully Responsive** - Optimized for all devices from mobile to desktop
-- **Dark/Light Mode** - Automatic theme switching with smooth transitions
-- **Beautiful Typography** - Enhanced readability with JetBrains Mono font
-- **Smooth Animations** - Fluid page transitions and interactive elements
-
-### 🔍 Content & Search
-- **Advanced Search** - Powered by [Pagefind](https://pagefind.app/) for fast, accurate results
-- **Enhanced Markdown** - Extended syntax with code highlighting and math support
-- **Interactive Table of Contents** - Auto-scroll navigation for long articles
-- **RSS Feed Generation** - Stay updated with automatic feed generation
-- **Reading Time Estimation** - Know how long articles take to read
-- **Post Categorization** - Organize content with tags and categories
+你好呀！我是**halei0v0**，一个热衷于开源项目和技术实践的开发者✨
 
 
 
-### 📱 Special Pages
-- **Anime Tracking Page** - Track your anime watching progress with ratings
-- **Friends Links Page** - Showcase friend websites with beautiful cards
-- **Diary/Moments Page** - Share life moments like social media posts
-- **Archive Page** - Organized timeline view of all posts
-- **About Page** - Customizable personal introduction (this page!)
+### 我的开源世界
 
-### 🛠 Technical Features
-- **Enhanced Code Blocks** - Powered by [Expressive Code](https://expressive-code.com/)
-- **Math Support** - LaTeX rendering with KaTeX for mathematical expressions
-- **Image Optimization** - PhotoSwipe gallery with lazy loading
-- **SEO Optimized** - Built-in sitemap and meta tags for better search visibility
-- **Performance Optimized** - Fast loading with caching and optimization
-- **Comment System Ready** - Integration support for Twikoo comments
+我在 GitHub 上维护着多个有趣的开源项目，每一个都承载着我的技术探索和实用需求：
 
-### 🎯 Advanced Markdown Features
-- **Callouts & Admonitions** - Beautiful info boxes with `> [!NOTE]`, `> [!TIP]`, `> [!WARNING]`
-- **Mathematical Equations** - Write LaTeX math with `$inline$` and `$$block$$` syntax
-- **GitHub Cards** - Embed repository cards with `::github{repo="user/repo"}`
-- **Syntax Highlighting** - Advanced code highlighting with line numbers
-- **Copy Code Buttons** - Easy code copying functionality
+- **FXdownloader**：一款便捷的番茄小说下载工具，基于 Python 开发，帮你轻松获取心仪的小说内容
+- **H-CAT**：基于 Mizuki 打造的二次元猫猫（猫羽雫）主题博客模板，兼具萌系视觉与完整博客功能，为创作者提供个性化的内容展示平台
+- **blog**：我的博客总纲仓库，我的个人博客可访问[https://v-blog.halei0v0.top](https://v-blog.halei0v0.top/)，在这里会分享我的技术心得、项目经验和日常感悟
+- **halei0v0.github.io**：我的个人导航主页，用 HTML 搭建的轻量化导航入口，方便快速访问常用站点
+- **warehouse**：用于存储各类技术资源和项目备份的仓库，是我的线上 “资源收纳箱”
+- **Novelreader**：一个看小说的静态网站
 
----
+### 我的技术足迹
 
-*Built with ❤️ using Astro and inspired by modern web design principles.*
+过去一年里，我保持着稳定的开源贡献节奏，在 FXdownloader 和个人导航主页两个仓库累计完成 12 次代码提交，同时新创建了 2 个独立仓库，持续拓展自己的技术版图。我擅长 Python 脚本开发和前端轻量化页面搭建，喜欢把日常需求转化为可用的工具和项目，也热衷于在开源社区中交流学习、沉淀经验。
+
+### 联系与交流
+
+如果你对我的项目感兴趣，或是有技术问题想要探讨，欢迎通过 GitHub 主页（https://github.com/halei0v0）找到我，期待和志同道合的开发者一起交流成长！
+
+
+
