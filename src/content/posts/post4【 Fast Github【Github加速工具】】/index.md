@@ -18,6 +18,14 @@ github加速神器，解决github打不开、用户头像无法加载、releases
 
 - [github-release](https://github.com/creazyboyone/FastGithub)
 
+- [网盘下载](https://pan.huang1111.cn/s/P6bO6hm)
+
+  :::note
+
+  [网盘下载](https://pan.huang1111.cn/s/P6bO6hm)为了方便无法直接访问GitHub的用户下载，无需登录可直接下载~~
+
+  :::
+
 ### 2. 部署方式
 
 #### 2.1 windows-x64桌面
