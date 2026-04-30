@@ -2,7 +2,7 @@
 title: 个人免费随机图床搭建
 published: 2026-04-25
 description: Vercel-Random-Picture-halei0v0我改编优化的一款随机图床，可部署到Eageone和Vercel pages。
-tags: [项目]
+tags: [项目,发布]
 image: "https://picture.halei0v0.top/api/random/人文"
 category: 项目
 draft: false
@@ -52,7 +52,7 @@ draft: false
 
 
 
-只需将您的图片素材直接**放入** `public/images` 目录即可：
+只需将您的图片素材直接**放入** `public/images/{你创建的分类文件夹}` 目录即可：
 
 - **无需重命名**：支持任何文件名。
 
@@ -113,12 +113,19 @@ pnpm dev
 
 
 - **随机图片重定向**: `GET /api/random`
+
 - 指定类型:
   - PC 端: `/api/random?type=pc`
   - 移动端: `/api/random?type=mobile`
+  
 - **指定分类**: `/api/random?classification=风景`
+
+  **或**：`/api/random/{分类名}`
+
 - **组合筛选**: `/api/random?type=pc&classification=动漫`
+
 - **JSON 格式**: `/api/random?redirect=false` (返回图片 URL 路径)
+
 - **图库预览**: `GET /gallery`
 
 ## 📄 许可证

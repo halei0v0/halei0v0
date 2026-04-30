@@ -1,1 +1,17 @@
- <p>开始于2025.10.08</p>
+<p>开始于2025.10.08</p>
+<p>已运行 <span id="runtime"></span></p>
+
+<script>
+  const start = new Date("2025-10-08").getTime();
+  function update() {
+    const now = new Date().getTime();
+    const diff = now - start;
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    document.getElementById("runtime").textContent = d + "天" + h + "时" + m + "分" + s + "秒";
+  }
+  update();
+  setInterval(update, 1000);
+</script>

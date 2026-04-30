@@ -2,7 +2,7 @@
 title: AIRI赛博生命（赛博 waifu、数字桌宠）
 published: 2026-03-08
 description: 让 AI waifu / 虚拟角色也能来到我们的世界
-tags: [AI，工具]
+tags: [AI,工具]
 image: "https://picture.tianhw.top/images/1070.webp"
 category: 工具
 draft: false
