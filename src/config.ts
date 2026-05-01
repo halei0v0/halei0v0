@@ -128,7 +128,7 @@ export const siteConfig: SiteConfig = {
 				"/assets/desktop-banner/cat (7).png",
 				"/assets/desktop-banner/cat (8).png",
 				"/assets/desktop-banner/cat (9).png",
-				"https://picture.tianhw.top/api/random?type=pc",
+				
 			], // 桌面横幅图片
 			mobile: [
 			    //"/assets/mobile-banner/cat (1).jpg",
@@ -156,7 +156,7 @@ export const siteConfig: SiteConfig = {
 				"/assets/mobile-banner/cat (17).png",
 			    //"/assets/mobile-banner/cat (18).png",
 				"/assets/mobile-banner/cat (19).png",
-				"https://picture.tianhw.top/api/random?type=mobile",
+				
 			], // 移动横幅图片
 		}, // 使用本地横幅图片
 
