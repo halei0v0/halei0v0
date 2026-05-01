@@ -21,3 +21,9 @@ draft: false
 2026.04.26【监狱啥也不是！烦】
 
 ![image-20260308151815566](https://cdn.jsdelivr.net/gh/halei0v0/warehouse@imgmd//imgmd/20260426023643367.png)
+
+2026.05.02【监狱小吃240万】
+
+![屏幕截图(25)](https://cdn.jsdelivr.net/gh/halei0v0/warehouse@imgmd//imgmd/20260502051611814.png)
+
+![屏幕截图(26)](https://cdn.jsdelivr.net/gh/halei0v0/warehouse@imgmd//imgmd/20260502051631016.png)
