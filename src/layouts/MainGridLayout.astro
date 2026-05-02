@@ -654,6 +654,7 @@ const transparentClass = shouldEnableTransparency
                                         muted={getMediaConfig(mobileItem).muted}
                                         loop={getMediaConfig(mobileItem).loop}
                                         playsinline={getMediaConfig(mobileItem).playsinline}
+                                        preload="metadata"
                                         class="block md:hidden object-cover h-full w-full transition-transform duration-500 ease-out"
                                         style={`object-position: ${siteConfig.banner.position || 'center'}`}
                                     />
@@ -676,6 +677,7 @@ const transparentClass = shouldEnableTransparency
                                         muted={getMediaConfig(desktopItem).muted}
                                         loop={getMediaConfig(desktopItem).loop}
                                         playsinline={getMediaConfig(desktopItem).playsinline}
+                                        preload="metadata"
                                         class="hidden md:block object-cover h-full w-full transition-transform duration-500 ease-out"
                                         style={`object-position: ${siteConfig.banner.position || 'center'}`}
                                     />
@@ -734,6 +736,7 @@ const transparentClass = shouldEnableTransparency
                             mobileVideo.muted = true;
                             mobileVideo.loop = true;
                             mobileVideo.playsInline = true;
+                            mobileVideo.preload = 'metadata';
                             mobileVideo.className = 'block md:hidden object-cover h-full w-full transition duration-700 opacity-100';
                             mobileVideo.style.objectPosition = position || 'center';
                             container.appendChild(mobileVideo);
@@ -758,6 +761,7 @@ const transparentClass = shouldEnableTransparency
                             desktopVideo.muted = true;
                             desktopVideo.loop = true;
                             desktopVideo.playsInline = true;
+                            desktopVideo.preload = 'metadata';
                             desktopVideo.className = 'hidden md:block object-cover h-full w-full transition duration-700 opacity-100';
                             desktopVideo.style.objectPosition = position || 'center';
                             container.appendChild(desktopVideo);

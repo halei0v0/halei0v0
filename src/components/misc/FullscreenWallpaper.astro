@@ -143,7 +143,8 @@ const renderGroups = [
 					const src = getMediaSrc(item);
 					const isVideoItem = isVideo(item);
 					const mediaConfig = getMediaConfig(item);
-					const baseStyle = `transform: translateZ(0); backface-visibility: hidden; will-change: opacity; ${blurAmount > 0 ? `filter: blur(${blurAmount}px);` : ''}; opacity: ${index === 0 ? 1 : 0};`;
+					const videoStyle = `transform: translateZ(0); backface-visibility: hidden; opacity: ${index === 0 ? 1 : 0};`;
+					const imageStyle = `transform: translateZ(0); backface-visibility: hidden; ${blurAmount > 0 ? `filter: blur(${blurAmount}px);` : ''} opacity: ${index === 0 ? 1 : 0};`;
 					
 					return isVideoItem ? (
 						<video
@@ -153,9 +154,10 @@ const renderGroups = [
 							muted={mediaConfig.muted}
 							loop={mediaConfig.loop}
 							playsinline={mediaConfig.playsinline}
+							preload="metadata"
 							class={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${positionClass}`}
 							data-carousel-item={index}
-							style={baseStyle}
+							style={videoStyle}
 						/>
 					) : (
 						<img
@@ -163,7 +165,7 @@ const renderGroups = [
 							alt={`${group.key} wallpaper ${index + 1}`}
 							class={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${positionClass}`}
 							data-carousel-item={index}
-							style={baseStyle}
+							style={imageStyle}
 							decoding="async"
 							loading={index === 0 ? "eager" : "lazy"}
 						/>
@@ -199,7 +201,8 @@ const renderGroups = [
 						const desktopDiv = document.createElement('div');
 						desktopDiv.className = 'hidden lg:block w-full h-full relative';
 						desktopDiv.style.transform = 'translateZ(0)';
-						const baseStyle = `transform: translateZ(0); backface-visibility: hidden; will-change: opacity; ${blurAmount > 0 ? `filter: blur(${blurAmount}px);` : ''} opacity: 1;`;
+						const videoStyle = 'transform: translateZ(0); backface-visibility: hidden; opacity: 1;';
+						const imageStyle = `transform: translateZ(0); backface-visibility: hidden; ${blurAmount > 0 ? 'filter: blur(' + blurAmount + 'px);' : ''} opacity: 1;`;
 						
 						if (desktopItem.isVideo) {
 							desktopDiv.innerHTML = `
@@ -210,8 +213,9 @@ const renderGroups = [
 									muted
 									loop
 									playsinline
+									preload="metadata"
 									class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${positionClass}"
-									style="${baseStyle}"
+									style="${videoStyle}"
 								></video>
 							`;
 						} else {
@@ -220,7 +224,7 @@ const renderGroups = [
 									src="${desktopItem.src}"
 									alt="desktop wallpaper"
 									class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${positionClass}"
-									style="${baseStyle}"
+									style="${imageStyle}"
 									decoding="async"
 									loading="eager"
 								/>
@@ -233,7 +237,8 @@ const renderGroups = [
 						const mobileDiv = document.createElement('div');
 						mobileDiv.className = 'block lg:hidden w-full h-full relative';
 						mobileDiv.style.transform = 'translateZ(0)';
-						const baseStyle = `transform: translateZ(0); backface-visibility: hidden; will-change: opacity; ${blurAmount > 0 ? `filter: blur(${blurAmount}px);` : ''} opacity: 1;`;
+						const videoStyle = 'transform: translateZ(0); backface-visibility: hidden; opacity: 1;';
+						const imageStyle = `transform: translateZ(0); backface-visibility: hidden; ${blurAmount > 0 ? 'filter: blur(' + blurAmount + 'px);' : ''} opacity: 1;`;
 						
 						if (mobileItem.isVideo) {
 							mobileDiv.innerHTML = `
@@ -244,8 +249,9 @@ const renderGroups = [
 									muted
 									loop
 									playsinline
+									preload="metadata"
 									class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${positionClass}"
-									style="${baseStyle}"
+									style="${videoStyle}"
 								></video>
 							`;
 						} else {
@@ -254,7 +260,7 @@ const renderGroups = [
 									src="${mobileItem.src}"
 									alt="mobile wallpaper"
 									class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${positionClass}"
-									style="${baseStyle}"
+									style="${imageStyle}"
 									decoding="async"
 									loading="eager"
 								/>
