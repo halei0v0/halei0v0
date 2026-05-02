@@ -117,19 +117,20 @@ export const siteConfig: SiteConfig = {
 
 	banner: {
 		// 支持单张图片或图片数组，当数组长度 > 1 时自动启用轮播
+		// 我添加了视频支持，但是可能非常吃性能，建议仅在高性能设备上使用，并且不要使用过多的视频文件，或使用分辨率较低的视频文件来减少加载时间和带宽占用。
 		src: {
 			desktop: [
-				"https://picture.halei0v0.top/videos/Classification/%E4%BA%8C%E6%AC%A1%E5%85%83/2026-04-26%2000-03%20%E3%80%90%E5%93%B2%E9%A3%8E%E5%A3%81%E7%BA%B8%E3%80%91%E5%87%AF%E5%B0%94%E5%B8%8C-%E6%98%8E%E6%97%A5%E6%96%B9%E8%88%9F.mp4",
+				//"https://picture.halei0v0.top/videos/Classification/%E4%BA%8C%E6%AC%A1%E5%85%83/2026-04-26%2000-03%20%E3%80%90%E5%93%B2%E9%A3%8E%E5%A3%81%E7%BA%B8%E3%80%91%E5%87%AF%E5%B0%94%E5%B8%8C-%E6%98%8E%E6%97%A5%E6%96%B9%E8%88%9F.mp4",
 				"/assets/desktop-banner/cat (1).png",
-				"https://picture.halei0v0.top/videos/Classification/%E4%BA%8C%E6%AC%A1%E5%85%83/2026-05-03%2002-30%20%E3%80%90%E5%93%B2%E9%A3%8E%E5%A3%81%E7%BA%B8%E3%80%91%E4%BA%8C%E6%AC%A1%E5%85%83-%E5%92%8C%E9%A3%8E-%E5%B7%AB%E5%A5%B3%E6%9C%8D.mp4",
+				//"https://picture.halei0v0.top/videos/Classification/%E4%BA%8C%E6%AC%A1%E5%85%83/2026-05-03%2002-30%20%E3%80%90%E5%93%B2%E9%A3%8E%E5%A3%81%E7%BA%B8%E3%80%91%E4%BA%8C%E6%AC%A1%E5%85%83-%E5%92%8C%E9%A3%8E-%E5%B7%AB%E5%A5%B3%E6%9C%8D.mp4",
 				"/assets/desktop-banner/cat (2).png",
-				"https://picture.halei0v0.top/videos/Classification/%E4%BA%8C%E6%AC%A1%E5%85%83/2026-05-03%2002-32%20%E3%80%90%E5%93%B2%E9%A3%8E%E5%A3%81%E7%BA%B8%E3%80%91%E5%85%89%E5%BD%B1-%E5%9D%90%E5%A7%BF-%E5%A4%A9%E7%A9%BA.mp4",
+				//"https://picture.halei0v0.top/videos/Classification/%E4%BA%8C%E6%AC%A1%E5%85%83/2026-05-03%2002-32%20%E3%80%90%E5%93%B2%E9%A3%8E%E5%A3%81%E7%BA%B8%E3%80%91%E5%85%89%E5%BD%B1-%E5%9D%90%E5%A7%BF-%E5%A4%A9%E7%A9%BA.mp4",
 				"/assets/desktop-banner/cat (3).png",
-				"https://picture.halei0v0.top/videos/Classification/%E4%BA%8C%E6%AC%A1%E5%85%83/2026-05-03%2002-26%20%E3%80%90%E5%93%B2%E9%A3%8E%E5%A3%81%E7%BA%B8%E3%80%91%E4%B9%A6%E6%9E%B6-%E5%86%AC%E6%97%A5-%E5%8A%A8%E6%BC%AB%E8%A7%92%E8%89%B2.mp4",
+				//"https://picture.halei0v0.top/videos/Classification/%E4%BA%8C%E6%AC%A1%E5%85%83/2026-05-03%2002-26%20%E3%80%90%E5%93%B2%E9%A3%8E%E5%A3%81%E7%BA%B8%E3%80%91%E4%B9%A6%E6%9E%B6-%E5%86%AC%E6%97%A5-%E5%8A%A8%E6%BC%AB%E8%A7%92%E8%89%B2.mp4",
 				"/assets/desktop-banner/cat (4).png",
 				//"/assets/desktop-banner/cat (5).png",
 		        //"/assets/desktop-banner/cat (6).png",
-				"https://picture.halei0v0.top/videos/Classification/%E4%BA%8C%E6%AC%A1%E5%85%83/2026-05-03%2002-32%20%E3%80%90%E5%93%B2%E9%A3%8E%E5%A3%81%E7%BA%B8%E3%80%91%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97-%E5%B0%91%E5%B9%B4-%E6%A0%A1%E6%9C%8D.mp4",
+				//"https://picture.halei0v0.top/videos/Classification/%E4%BA%8C%E6%AC%A1%E5%85%83/2026-05-03%2002-32%20%E3%80%90%E5%93%B2%E9%A3%8E%E5%A3%81%E7%BA%B8%E3%80%91%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97-%E5%B0%91%E5%B9%B4-%E6%A0%A1%E6%9C%8D.mp4",
 				"/assets/desktop-banner/cat (7).png",
 				"/assets/desktop-banner/cat (8).png",
 				"/assets/desktop-banner/cat (9).png",
