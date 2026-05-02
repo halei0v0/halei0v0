@@ -135,48 +135,7 @@ export type SiteConfig = {
 		showModeSwitchOnMobile?: "off" | "mobile" | "desktop" | "both"; // 整体布局方案切换按钮显示设置：off=隐藏，mobile=仅移动端，desktop=仅桌面端，both=全部显示
 	};
 
-	banner: {
-		src:
-			| string
-			| string[]
-			| {
-					desktop?: string | string[];
-					mobile?: string | string[];
-			  }; // 支持单个图片、图片数组或分别设置桌面端和移动端图片
-		position?: "top" | "center" | "bottom";
-		carousel?: {
-			enable: boolean; // 是否启用轮播
-			interval: number; // 轮播间隔时间（秒）
-		};
-		waves?: {
-			enable: boolean; // 是否启用水波纹效果
-			performanceMode?: boolean; // 性能模式：减少动画复杂度
-			mobileDisable?: boolean; // 移动端禁用
-		};
-		imageApi?: {
-			enable: boolean; // 是否启用图片API
-			url: string; // API地址，返回每行一个图片链接的文本
-		};
-		homeText?: {
-			enable: boolean; // 是否在首页显示自定义文字
-			title?: string; // 主标题
-			subtitle?: string | string[]; // 副标题，支持单个字符串或字符串数组
-			typewriter?: {
-				enable: boolean; // 是否启用打字机效果
-				speed: number; // 打字速度（毫秒）
-				deleteSpeed: number; // 删除速度（毫秒）
-				pauseTime: number; // 完整显示后的暂停时间（毫秒）
-			};
-		};
-		credit: {
-			enable: boolean;
-			text: string;
-			url?: string;
-		};
-		navbar?: {
-			transparentMode?: "semi" | "full" | "semifull"; // 导航栏透明模式
-		};
-	};
+	banner: BannerConfig;
 	toc: {
 		enable: boolean;
 		mode: "float" | "sidebar"; // 目录显示模式："float" 悬浮按钮模式，"sidebar" 侧边栏模式
@@ -411,22 +370,77 @@ export type SakuraConfig = {
 	zIndex: number; // 层级，确保樱花在合适的层级显示
 };
 
+export type MediaSource = {
+	type: "image" | "video";
+	src: string;
+	poster?: string;
+	autoplay?: boolean;
+	muted?: boolean;
+	loop?: boolean;
+	playsinline?: boolean;
+};
+
+export type BannerConfig = {
+	src:
+		| string
+		| string[]
+		| MediaSource[]
+		| {
+				desktop?: string | string[] | MediaSource[];
+				mobile?: string | string[] | MediaSource[];
+		  };
+	position?: "top" | "center" | "bottom";
+	carousel?: {
+		enable: boolean;
+		interval: number;
+	};
+	waves?: {
+		enable: boolean;
+		performanceMode?: boolean;
+		mobileDisable?: boolean;
+	};
+	imageApi?: {
+		enable: boolean;
+		url: string;
+	};
+	homeText?: {
+		enable: boolean;
+		title?: string;
+		subtitle?: string | string[];
+		typewriter?: {
+			enable: boolean;
+			speed: number;
+			deleteSpeed: number;
+			pauseTime: number;
+		};
+	};
+	credit: {
+		enable: boolean;
+		text: string;
+		url?: string;
+	};
+	navbar?: {
+		transparentMode?: "semi" | "full" | "semifull";
+	};
+};
+
 export type FullscreenWallpaperConfig = {
 	src:
 		| string
 		| string[]
+		| MediaSource[]
 		| {
-				desktop?: string | string[];
-				mobile?: string | string[];
-		  }; // 支持单个图片、图片数组或分别设置桌面端和移动端图片
-	position?: "top" | "center" | "bottom"; // 壁纸位置，等同于 object-position
+				desktop?: string | string[] | MediaSource[];
+				mobile?: string | string[] | MediaSource[];
+		  };
+	position?: "top" | "center" | "bottom";
 	carousel?: {
-		enable: boolean; // 是否启用轮播
-		interval: number; // 轮播间隔时间（秒）
+		enable: boolean;
+		interval: number;
 	};
-	zIndex?: number; // 层级，确保壁纸在合适的层级显示
-	opacity?: number; // 壁纸透明度，0-1之间
-	blur?: number; // 背景模糊程度，单位px
+	zIndex?: number;
+	opacity?: number;
+	blur?: number;
 };
 
 /**

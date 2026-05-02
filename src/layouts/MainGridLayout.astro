@@ -19,13 +19,11 @@ import {
 import {
 	BANNER_HEIGHT,
 	BANNER_HEIGHT_EXTEND,
-	// BANNER_HEIGHT_HOME,
-	// MAIN_PANEL_OVERLAPS_BANNER_HEIGHT,
 } from "../constants/constants";
+import type { MediaSource } from "../types/config";
 import { widgetManager } from "../utils/widget-manager";
 import Layout from "./Layout.astro";
 
-// TOC模式配置
 const tocMode = siteConfig.toc.mode || "float";
 const isFloatTOC = tocMode === "float";
 const isSidebarTOC = tocMode === "sidebar";
@@ -40,26 +38,49 @@ interface Props {
 	headings?: MarkdownHeading[];
 }
 
-// 类型守卫函数
-// const isBannerSrcObject = (
-// 	src:
-// 		| string
-// 		| string[]
-// 		| { desktop?: string | string[]; mobile?: string | string[] },
-// ): src is { desktop?: string | string[]; mobile?: string | string[] } => {
-// 	return (
-// 		typeof src === "object" &&
-// 		src !== null &&
-// 		!Array.isArray(src) &&
-// 		("desktop" in src || "mobile" in src)
-// 	);
-// };
+type MediaItem = MediaSource | string;
 
-// 获取banner图片的辅助函数
-const getBannerImages = async () => {
+const isMediaSource = (item: MediaItem): item is MediaSource => {
+	return typeof item === "object" && item !== null && "type" in item;
+};
+
+const isVideo = (item: MediaItem): boolean => {
+	if (isMediaSource(item)) {
+		return item.type === "video";
+	}
+	if (typeof item === "string") {
+		const videoExtensions = [".mp4", ".webm", ".ogg", ".mov", ".avi"];
+		return videoExtensions.some((ext) => item.toLowerCase().endsWith(ext));
+	}
+	return false;
+};
+
+const getMediaSrc = (item: MediaItem): string => {
+	return isMediaSource(item) ? item.src : item;
+};
+
+const getMediaConfig = (item: MediaItem) => {
+	if (isMediaSource(item)) {
+		return {
+			poster: item.poster,
+			autoplay: item.autoplay ?? true,
+			muted: item.muted ?? true,
+			loop: item.loop ?? true,
+			playsinline: item.playsinline ?? true,
+		};
+	}
+	return {
+		poster: undefined,
+		autoplay: true,
+		muted: true,
+		loop: true,
+		playsinline: true,
+	};
+};
+
+const getBannerMedia = async () => {
 	let bannerSrc = siteConfig.banner.src;
 
-	// 如果启用了图片API，获取API图片
 	if (siteConfig.banner.imageApi?.enable && siteConfig.banner.imageApi?.url) {
 		try {
 			const response = await fetch(siteConfig.banner.imageApi.url);
@@ -74,6 +95,9 @@ const getBannerImages = async () => {
 		}
 	}
 
+	const toArray = (src: string | string[] | MediaSource[] | undefined): MediaItem[] =>
+		Array.isArray(src) ? src : typeof src === "string" ? [src] : [];
+
 	if (
 		typeof bannerSrc === "object" &&
 		bannerSrc !== null &&
@@ -81,22 +105,22 @@ const getBannerImages = async () => {
 		("desktop" in bannerSrc || "mobile" in bannerSrc)
 	) {
 		const srcObj = bannerSrc as {
-			desktop?: string | string[];
-			mobile?: string | string[];
+			desktop?: string | string[] | MediaSource[];
+			mobile?: string | string[] | MediaSource[];
 		};
+		const desktop = toArray(srcObj.desktop);
+		const mobile = toArray(srcObj.mobile);
 		return {
-			desktop: srcObj.desktop || srcObj.mobile || "",
-			mobile: srcObj.mobile || srcObj.desktop || "",
+			desktop: desktop.length > 0 ? desktop : mobile,
+			mobile: mobile.length > 0 ? mobile : desktop,
 		};
 	}
-	// 如果是字符串或字符串数组，同时用于桌面端和移动端
-	return {
-		desktop: bannerSrc,
-		mobile: bannerSrc,
-	};
+
+	const allMedia = toArray(bannerSrc as string | MediaItem[]);
+	return { desktop: allMedia, mobile: allMedia };
 };
 
-const bannerImages = await getBannerImages();
+const bannerMedia = await getBannerMedia();
 
 const {
 	title,
@@ -600,47 +624,70 @@ const transparentClass = shouldEnableTransparency
 <!-- Banner - 始终渲染，通过 JS 控制显示隐藏 -->
 <div id="banner-wrapper" class={`absolute z-10 w-full transition duration-700 overflow-hidden ${mobileNonHomeBannerClass}`} style={`top: -${BANNER_HEIGHT_EXTEND}vh`}>
 
-    {siteConfig.banner.carousel?.enable && ((bannerImages.desktop && Array.isArray(bannerImages.desktop) && bannerImages.desktop.length > 1) || (bannerImages.mobile && Array.isArray(bannerImages.mobile) && bannerImages.mobile.length > 1)) ? (
-        <!-- Carousel mode for multiple images -->
+    {siteConfig.banner.carousel?.enable && ((bannerMedia.desktop && Array.isArray(bannerMedia.desktop) && bannerMedia.desktop.length > 1) || (bannerMedia.mobile && Array.isArray(bannerMedia.mobile) && bannerMedia.mobile.length > 1)) ? (
         <div id="banner-carousel" class="relative h-full w-full">
             <ul class="carousel-list h-full w-full">
                 {Math.max(
-                    Array.isArray(bannerImages.desktop) ? bannerImages.desktop.length : 0,
-                    Array.isArray(bannerImages.mobile) ? bannerImages.mobile.length : 0
+                    Array.isArray(bannerMedia.desktop) ? bannerMedia.desktop.length : 0,
+                    Array.isArray(bannerMedia.mobile) ? bannerMedia.mobile.length : 0
                 ) && Array.from({ length: Math.max(
-                    Array.isArray(bannerImages.desktop) ? bannerImages.desktop.length : 0,
-                    Array.isArray(bannerImages.mobile) ? bannerImages.mobile.length : 0
+                    Array.isArray(bannerMedia.desktop) ? bannerMedia.desktop.length : 0,
+                    Array.isArray(bannerMedia.mobile) ? bannerMedia.mobile.length : 0
                 ) }).map((_, index) => {
-                    // 确保至少有一个平台有对应索引的图片
-                    const hasDesktopImage = Array.isArray(bannerImages.desktop) && bannerImages.desktop[index];
-                    const hasMobileImage = Array.isArray(bannerImages.mobile) && bannerImages.mobile[index];
+                    const desktopItem = Array.isArray(bannerMedia.desktop) ? bannerMedia.desktop[index] : null;
+                    const mobileItem = Array.isArray(bannerMedia.mobile) ? bannerMedia.mobile[index] : null;
                     
-                    // 如果两个平台都没有对应索引的图片，跳过这个轮播项
-                    if (!hasDesktopImage && !hasMobileImage) {
+                    if (!desktopItem && !mobileItem) {
                         return null;
                     }
                     
+                    const positionStyle = siteConfig.banner.position === "top" ? "object-top" : siteConfig.banner.position === "bottom" ? "object-bottom" : "object-center";
+                    
                     return (
                         <li class={`carousel-item absolute inset-0 transition-all duration-500 ${index === 0 ? 'opacity-100 scale-100' : 'opacity-0 scale-110'}`}>
-                            <!-- Mobile: use mobile-specific images -->
-                            {hasMobileImage && (
-                                <ImageWrapper 
-                                    alt={`Mobile banner image ${index + 1}`} 
-                                    class:list={["block md:hidden object-cover h-full w-full transition-transform duration-500 ease-out"]}
-                                    src={Array.isArray(bannerImages.mobile) ? bannerImages.mobile[index] : (typeof bannerImages.mobile === 'string' ? bannerImages.mobile : '')} 
-                                    position={siteConfig.banner.position}
-                                    loading={index === 0 ? "eager" : "lazy"}
-                                />
+                            {mobileItem && (
+                                isVideo(mobileItem) ? (
+                                    <video
+                                        src={getMediaSrc(mobileItem)}
+                                        poster={getMediaConfig(mobileItem).poster}
+                                        autoplay={getMediaConfig(mobileItem).autoplay}
+                                        muted={getMediaConfig(mobileItem).muted}
+                                        loop={getMediaConfig(mobileItem).loop}
+                                        playsinline={getMediaConfig(mobileItem).playsinline}
+                                        class="block md:hidden object-cover h-full w-full transition-transform duration-500 ease-out"
+                                        style={`object-position: ${siteConfig.banner.position || 'center'}`}
+                                    />
+                                ) : (
+                                    <ImageWrapper 
+                                        alt={`Mobile banner image ${index + 1}`} 
+                                        class:list={["block md:hidden object-cover h-full w-full transition-transform duration-500 ease-out"]}
+                                        src={getMediaSrc(mobileItem)} 
+                                        position={siteConfig.banner.position}
+                                        loading={index === 0 ? "eager" : "lazy"}
+                                    />
+                                )
                             )}
-                            <!-- Desktop/Tablet: use desktop-specific images -->
-                            {hasDesktopImage && (
-                                <ImageWrapper 
-                                    alt={`Desktop banner image ${index + 1}`} 
-                                    class:list={["hidden md:block object-cover h-full w-full transition-transform duration-500 ease-out"]}
-                                    src={Array.isArray(bannerImages.desktop) ? bannerImages.desktop[index] : (typeof bannerImages.desktop === 'string' ? bannerImages.desktop : '')} 
-                                    position={siteConfig.banner.position}
-                                    loading={index === 0 ? "eager" : "lazy"}
-                                />
+                            {desktopItem && (
+                                isVideo(desktopItem) ? (
+                                    <video
+                                        src={getMediaSrc(desktopItem)}
+                                        poster={getMediaConfig(desktopItem).poster}
+                                        autoplay={getMediaConfig(desktopItem).autoplay}
+                                        muted={getMediaConfig(desktopItem).muted}
+                                        loop={getMediaConfig(desktopItem).loop}
+                                        playsinline={getMediaConfig(desktopItem).playsinline}
+                                        class="hidden md:block object-cover h-full w-full transition-transform duration-500 ease-out"
+                                        style={`object-position: ${siteConfig.banner.position || 'center'}`}
+                                    />
+                                ) : (
+                                    <ImageWrapper 
+                                        alt={`Desktop banner image ${index + 1}`} 
+                                        class:list={["hidden md:block object-cover h-full w-full transition-transform duration-500 ease-out"]}
+                                        src={getMediaSrc(desktopItem)} 
+                                        position={siteConfig.banner.position}
+                                        loading={index === 0 ? "eager" : "lazy"}
+                                    />
+                                )
                             )}
                         </li>
                     );
@@ -648,57 +695,82 @@ const transparentClass = shouldEnableTransparency
             </ul>
         </div>
     ) : (
-        <!-- Single image mode -->
         <div id="banner-single-container" class="relative h-full w-full">
-            <script is:inline define:vars={{ desktopImages: bannerImages.desktop, mobileImages: bannerImages.mobile, position: siteConfig.banner.position }}>
+            <script is:inline define:vars={{ desktopMedia: bannerMedia.desktop.map(m => ({ src: getMediaSrc(m), isVideo: isVideo(m), config: getMediaConfig(m) })), mobileMedia: bannerMedia.mobile.map(m => ({ src: getMediaSrc(m), isVideo: isVideo(m), config: getMediaConfig(m) })), position: siteConfig.banner.position }}>
                 (function() {
-                    const getRandomImage = (images, storageKey) => {
-                        if (Array.isArray(images)) {
-                            if (images.length === 0) return null;
-                            if (images.length === 1) return images[0];
+                    const getRandomMedia = (media, storageKey) => {
+                        if (Array.isArray(media)) {
+                            if (media.length === 0) return null;
+                            if (media.length === 1) return media[0];
                             
                             const lastIndex = sessionStorage.getItem(storageKey);
                             let newIndex;
                             
                             do {
-                                newIndex = Math.floor(Math.random() * images.length);
+                                newIndex = Math.floor(Math.random() * media.length);
                             } while (newIndex === parseInt(lastIndex || '-1'));
                             
                             sessionStorage.setItem(storageKey, newIndex.toString());
-                            return images[newIndex];
+                            return media[newIndex];
                         }
-                        return images || null;
+                        return media || null;
                     };
                     
                     const container = document.getElementById('banner-single-container');
                     
-                    // 检查容器是否已有图片，避免在页面切换或缩放时重复创建
-                    if (container.querySelector('img')) {
+                    if (container.querySelector('img') || container.querySelector('video')) {
                         return;
                     }
                     
-                    const desktopSrc = getRandomImage(desktopImages, 'banner_desktop_index');
-                    const mobileSrc = getRandomImage(mobileImages, 'banner_mobile_index');
+                    const desktopItem = getRandomMedia(desktopMedia, 'banner_desktop_index');
+                    const mobileItem = getRandomMedia(mobileMedia, 'banner_mobile_index');
                     
-                    if (mobileSrc) {
-                        const mobileImg = document.createElement('img');
-                        mobileImg.alt = 'Mobile banner image of the blog';
-                        mobileImg.className = 'block md:hidden object-cover h-full w-full transition duration-700 opacity-100';
-                        mobileImg.src = mobileSrc;
-                        mobileImg.loading = 'eager';
-                        mobileImg.dataset.position = position;
-                        container.appendChild(mobileImg);
+                    if (mobileItem) {
+                        if (mobileItem.isVideo) {
+                            const mobileVideo = document.createElement('video');
+                            mobileVideo.src = mobileItem.src;
+                            mobileVideo.poster = mobileItem.config.poster || '';
+                            mobileVideo.autoplay = true;
+                            mobileVideo.muted = true;
+                            mobileVideo.loop = true;
+                            mobileVideo.playsInline = true;
+                            mobileVideo.className = 'block md:hidden object-cover h-full w-full transition duration-700 opacity-100';
+                            mobileVideo.style.objectPosition = position || 'center';
+                            container.appendChild(mobileVideo);
+                        } else {
+                            const mobileImg = document.createElement('img');
+                            mobileImg.alt = 'Mobile banner image of the blog';
+                            mobileImg.className = 'block md:hidden object-cover h-full w-full transition duration-700 opacity-100';
+                            mobileImg.src = mobileItem.src;
+                            mobileImg.loading = 'eager';
+                            mobileImg.style.objectPosition = position || 'center';
+                            container.appendChild(mobileImg);
+                        }
                     }
                     
-                    if (desktopSrc) {
-                        const desktopImg = document.createElement('img');
-                        desktopImg.id = 'banner';
-                        desktopImg.alt = 'Desktop banner image of the blog';
-                        desktopImg.className = 'hidden md:block object-cover h-full w-full transition duration-700 opacity-100';
-                        desktopImg.src = desktopSrc;
-                        desktopImg.loading = 'eager';
-                        desktopImg.dataset.position = position;
-                        container.appendChild(desktopImg);
+                    if (desktopItem) {
+                        if (desktopItem.isVideo) {
+                            const desktopVideo = document.createElement('video');
+                            desktopVideo.id = 'banner';
+                            desktopVideo.src = desktopItem.src;
+                            desktopVideo.poster = desktopItem.config.poster || '';
+                            desktopVideo.autoplay = true;
+                            desktopVideo.muted = true;
+                            desktopVideo.loop = true;
+                            desktopVideo.playsInline = true;
+                            desktopVideo.className = 'hidden md:block object-cover h-full w-full transition duration-700 opacity-100';
+                            desktopVideo.style.objectPosition = position || 'center';
+                            container.appendChild(desktopVideo);
+                        } else {
+                            const desktopImg = document.createElement('img');
+                            desktopImg.id = 'banner';
+                            desktopImg.alt = 'Desktop banner image of the blog';
+                            desktopImg.className = 'hidden md:block object-cover h-full w-full transition duration-700 opacity-100';
+                            desktopImg.src = desktopItem.src;
+                            desktopImg.loading = 'eager';
+                            desktopImg.style.objectPosition = position || 'center';
+                            container.appendChild(desktopImg);
+                        }
                     }
                 })();
             </script>

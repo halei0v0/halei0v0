@@ -1,6 +1,6 @@
 ---
 import { siteConfig } from "../../config";
-import type { FullscreenWallpaperConfig } from "../../types/config";
+import type { FullscreenWallpaperConfig, MediaSource } from "../../types/config";
 
 interface Props {
 	config: FullscreenWallpaperConfig;
@@ -9,11 +9,49 @@ interface Props {
 
 const { config, className } = Astro.props;
 
-// 获取当前设备类型的图片源
-const getImageSources = async () => {
+type MediaItem = MediaSource | string;
+
+const isMediaSource = (item: MediaItem): item is MediaSource => {
+	return typeof item === "object" && item !== null && "type" in item;
+};
+
+const isVideo = (item: MediaItem): boolean => {
+	if (isMediaSource(item)) {
+		return item.type === "video";
+	}
+	if (typeof item === "string") {
+		const videoExtensions = [".mp4", ".webm", ".ogg", ".mov", ".avi"];
+		return videoExtensions.some((ext) => item.toLowerCase().endsWith(ext));
+	}
+	return false;
+};
+
+const getMediaSrc = (item: MediaItem): string => {
+	return isMediaSource(item) ? item.src : item;
+};
+
+const getMediaConfig = (item: MediaItem) => {
+	if (isMediaSource(item)) {
+		return {
+			poster: item.poster,
+			autoplay: item.autoplay ?? true,
+			muted: item.muted ?? true,
+			loop: item.loop ?? true,
+			playsinline: item.playsinline ?? true,
+		};
+	}
+	return {
+		poster: undefined,
+		autoplay: true,
+		muted: true,
+		loop: true,
+		playsinline: true,
+	};
+};
+
+const getMediaSources = async () => {
 	let srcConfig = config.src;
 
-	// API 图片逻辑
 	if (siteConfig.banner.imageApi?.enable && siteConfig.banner.imageApi?.url) {
 		try {
 			const response = await fetch(siteConfig.banner.imageApi.url);
@@ -27,8 +65,8 @@ const getImageSources = async () => {
 		}
 	}
 
-	const toArray = (src: string | string[] | undefined): string[] => 
-		Array.isArray(src) ? src : (typeof src === "string" ? [src] : []);
+	const toArray = (src: string | string[] | MediaSource[] | undefined): MediaItem[] =>
+		Array.isArray(src) ? src : typeof src === "string" ? [src] : [];
 
 	if (typeof srcConfig === "object" && srcConfig !== null && !Array.isArray(srcConfig)) {
 		const desktop = toArray(srcConfig.desktop);
@@ -39,23 +77,20 @@ const getImageSources = async () => {
 		};
 	}
 
-	// 如果是字符串或字符串数组，同时用于桌面端和移动端
-	const allImages = toArray(srcConfig as string | string[]);
-	return { desktop: allImages, mobile: allImages };
+	const allMedia = toArray(srcConfig as string | MediaItem[]);
+	return { desktop: allMedia, mobile: allMedia };
 };
 
-const imageSources = await getImageSources();
-const hasDesktopImages = imageSources.desktop.length > 0;
-const hasMobileImages = imageSources.mobile.length > 0;
+const mediaSources = await getMediaSources();
+const hasDesktopMedia = mediaSources.desktop.length > 0;
+const hasMobileMedia = mediaSources.mobile.length > 0;
 
-if (!hasDesktopImages && !hasMobileImages) return null;
+if (!hasDesktopMedia && !hasMobileMedia) return null;
 
-// 轮播配置
-const isCarouselEnabled = config.carousel?.enable && 
-	(imageSources.desktop.length > 1 || imageSources.mobile.length > 1);
+const isCarouselEnabled = config.carousel?.enable &&
+	(mediaSources.desktop.length > 1 || mediaSources.mobile.length > 1);
 const carouselInterval = config.carousel?.interval || 5;
 
-// 样式配置
 const position = config.position || "center";
 const zIndex = config.zIndex || -1;
 const opacity = config.opacity || 0.8;
@@ -71,20 +106,20 @@ const positionClass = (() => {
 const renderGroups = [
 	{
 		key: 'desktop',
-		images: imageSources.desktop,
+		media: mediaSources.desktop,
 		containerClass: "hidden md:block",
-		hasImages: hasDesktopImages
+		hasMedia: hasDesktopMedia
 	},
 	{
 		key: 'mobile',
-		images: imageSources.mobile,
+		media: mediaSources.mobile,
 		containerClass: "block md:hidden",
-		hasImages: hasMobileImages
+		hasMedia: hasMobileMedia
 	}
 ];
 ---
 
-<div 
+<div
 	class:list={[
 		"fixed inset-0 w-full h-full overflow-hidden pointer-events-none",
 		className
@@ -93,7 +128,6 @@ const renderGroups = [
 	data-fullscreen-wallpaper
 >
 	<script is:inline>
-	// 立即执行脚本：防止闪烁
 	(function() {
 		const mode = localStorage.getItem('wallpaperMode') || 'banner';
 		if (mode !== 'fullscreen') {
@@ -103,76 +137,129 @@ const renderGroups = [
 	</script>
 
 	{isCarouselEnabled ? (
-		renderGroups.map(group => group.hasImages && (
+		renderGroups.map(group => group.hasMedia && (
 			<div class={`${group.containerClass} w-full h-full relative`} style="transform: translateZ(0);">
-				{group.images.map((src, index) => (
-					<img
-						src={src}
-						alt={`${group.key} wallpaper ${index + 1}`}
-						class={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${positionClass}`}
-						data-carousel-item={index}
-						style={`transform: translateZ(0); backface-visibility: hidden; will-change: opacity; ${blurAmount > 0 ? `filter: blur(${blurAmount}px);` : ''}; opacity: ${index === 0 ? 1 : 0};`}
-						decoding="async"
-						loading={index === 0 ? "eager" : "lazy"} 
-					/>
-				))}
+				{group.media.map((item, index) => {
+					const src = getMediaSrc(item);
+					const isVideoItem = isVideo(item);
+					const mediaConfig = getMediaConfig(item);
+					const baseStyle = `transform: translateZ(0); backface-visibility: hidden; will-change: opacity; ${blurAmount > 0 ? `filter: blur(${blurAmount}px);` : ''}; opacity: ${index === 0 ? 1 : 0};`;
+					
+					return isVideoItem ? (
+						<video
+							src={src}
+							poster={mediaConfig.poster}
+							autoplay={mediaConfig.autoplay}
+							muted={mediaConfig.muted}
+							loop={mediaConfig.loop}
+							playsinline={mediaConfig.playsinline}
+							class={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${positionClass}`}
+							data-carousel-item={index}
+							style={baseStyle}
+						/>
+					) : (
+						<img
+							src={src}
+							alt={`${group.key} wallpaper ${index + 1}`}
+							class={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${positionClass}`}
+							data-carousel-item={index}
+							style={baseStyle}
+							decoding="async"
+							loading={index === 0 ? "eager" : "lazy"}
+						/>
+					);
+				})}
 			</div>
 		))
 	) : (
 		<div id="wallpaper-single-container" class="w-full h-full relative">
-			<script is:inline define:vars={{ desktopImages: imageSources.desktop, mobileImages: imageSources.mobile, positionClass, blurAmount }}>
+			<script is:inline define:vars={{ desktopMedia: mediaSources.desktop.map(m => ({ src: getMediaSrc(m), isVideo: isVideo(m), config: getMediaConfig(m) })), mobileMedia: mediaSources.mobile.map(m => ({ src: getMediaSrc(m), isVideo: isVideo(m), config: getMediaConfig(m) })), positionClass, blurAmount }}>
 				(function() {
-					const getRandomImage = (images, storageKey) => {
-						if (images.length === 0) return null;
-						if (images.length === 1) return images[0];
+					const getRandomMedia = (media, storageKey) => {
+						if (media.length === 0) return null;
+						if (media.length === 1) return media[0];
 						
 						const lastIndex = sessionStorage.getItem(storageKey);
 						let newIndex;
 						
 						do {
-							newIndex = Math.floor(Math.random() * images.length);
+							newIndex = Math.floor(Math.random() * media.length);
 						} while (newIndex === parseInt(lastIndex || '-1'));
 						
 						sessionStorage.setItem(storageKey, newIndex.toString());
-						return images[newIndex];
+						return media[newIndex];
 					};
 					
-					const desktopSrc = getRandomImage(desktopImages, 'wallpaper_desktop_index');
-					const mobileSrc = getRandomImage(mobileImages, 'wallpaper_mobile_index');
+					const desktopItem = getRandomMedia(desktopMedia, 'wallpaper_desktop_index');
+					const mobileItem = getRandomMedia(mobileMedia, 'wallpaper_mobile_index');
 					
 					const container = document.getElementById('wallpaper-single-container');
 					
-					if (desktopSrc) {
+					if (desktopItem) {
 						const desktopDiv = document.createElement('div');
 						desktopDiv.className = 'hidden lg:block w-full h-full relative';
 						desktopDiv.style.transform = 'translateZ(0)';
-						desktopDiv.innerHTML = `
-							<img
-								src="${desktopSrc}"
-								alt="desktop wallpaper"
-								class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${positionClass}"
-								style="transform: translateZ(0); backface-visibility: hidden; will-change: opacity; ${blurAmount > 0 ? `filter: blur(${blurAmount}px);` : ''} opacity: 1;"
-								decoding="async"
-								loading="eager"
-							/>
-						`;
+						const baseStyle = `transform: translateZ(0); backface-visibility: hidden; will-change: opacity; ${blurAmount > 0 ? `filter: blur(${blurAmount}px);` : ''} opacity: 1;`;
+						
+						if (desktopItem.isVideo) {
+							desktopDiv.innerHTML = `
+								<video
+									src="${desktopItem.src}"
+									poster="${desktopItem.config.poster || ''}"
+									autoplay
+									muted
+									loop
+									playsinline
+									class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${positionClass}"
+									style="${baseStyle}"
+								></video>
+							`;
+						} else {
+							desktopDiv.innerHTML = `
+								<img
+									src="${desktopItem.src}"
+									alt="desktop wallpaper"
+									class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${positionClass}"
+									style="${baseStyle}"
+									decoding="async"
+									loading="eager"
+								/>
+							`;
+						}
 						container.appendChild(desktopDiv);
 					}
 					
-					if (mobileSrc) {
+					if (mobileItem) {
 						const mobileDiv = document.createElement('div');
 						mobileDiv.className = 'block lg:hidden w-full h-full relative';
 						mobileDiv.style.transform = 'translateZ(0)';
-						mobileDiv.innerHTML = `
-							<img
-								src="${mobileSrc}"
-								alt="mobile wallpaper"
-								class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${positionClass}"
-								style="transform: translateZ(0); backface-visibility: hidden; will-change: opacity; ${blurAmount > 0 ? `filter: blur(${blurAmount}px);` : ''} opacity: 1;"
-								decoding="async"
-								loading="eager"
-							/>
-						`;
+						const baseStyle = `transform: translateZ(0); backface-visibility: hidden; will-change: opacity; ${blurAmount > 0 ? `filter: blur(${blurAmount}px);` : ''} opacity: 1;`;
+						
+						if (mobileItem.isVideo) {
+							mobileDiv.innerHTML = `
+								<video
+									src="${mobileItem.src}"
+									poster="${mobileItem.config.poster || ''}"
+									autoplay
+									muted
+									loop
+									playsinline
+									class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${positionClass}"
+									style="${baseStyle}"
+								></video>
+							`;
+						} else {
+							mobileDiv.innerHTML = `
+								<img
+									src="${mobileItem.src}"
+									alt="mobile wallpaper"
+									class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${positionClass}"
+									style="${baseStyle}"
+									decoding="async"
+									loading="eager"
+								/>
+							`;
+						}
 						container.appendChild(mobileDiv);
 					}
 				})();
@@ -210,22 +297,38 @@ const renderGroups = [
 				};
 			});
 
-			// 初始化显示：根据 savedIndex 立即修正图片显示
 			function initImage(stateItem) {
 				const { items, currentIndex } = stateItem;
-				// 立即设置样式，防止视觉上跳回第一张
 				for (let i = 0; i < items.length; i++) {
 					items[i].style.opacity = i === currentIndex ? '1' : '0';
+					const video = items[i].querySelector('video') || (items[i].tagName === 'VIDEO' ? items[i] : null);
+					if (video) {
+						if (i === currentIndex) {
+							video.play().catch(() => {});
+						} else {
+							video.pause();
+						}
+					}
 				}
 			}
 
-			// 切换下一张
 			function switchNextImage(stateItem) {
 				const { items, currentIndex } = stateItem;
 				const nextIndex = (currentIndex + 1) % items.length;
 				
 				items[currentIndex].style.opacity = '0';
 				items[nextIndex].style.opacity = '1';
+				
+				const currentVideo = items[currentIndex].querySelector('video') || (items[currentIndex].tagName === 'VIDEO' ? items[currentIndex] : null);
+				const nextVideo = items[nextIndex].querySelector('video') || (items[nextIndex].tagName === 'VIDEO' ? items[nextIndex] : null);
+				
+				if (currentVideo) {
+					currentVideo.pause();
+				}
+				if (nextVideo) {
+					nextVideo.currentTime = 0;
+					nextVideo.play().catch(() => {});
+				}
 				
 				stateItem.currentIndex = nextIndex;
 
@@ -258,13 +361,24 @@ const renderGroups = [
 			const handleVisibilityChange = () => {
 				if (document.hidden) {
 					stop();
+					state.forEach(s => {
+						s.items.forEach(item => {
+							const video = item.querySelector('video') || (item.tagName === 'VIDEO' ? item : null);
+							if (video) video.pause();
+						});
+					});
 				} else {
 					const exists = state.some(s => s.items.length > 0 && document.body.contains(s.items[0]));
-					if (exists) start();
+					if (exists) {
+						start();
+						state.forEach(s => {
+							const video = s.items[s.currentIndex]?.querySelector('video') || (s.items[s.currentIndex]?.tagName === 'VIDEO' ? s.items[s.currentIndex] : null);
+							if (video) video.play().catch(() => {});
+						});
+					}
 				}
 			};
 
-			// 初始化状态
 			state.forEach(s => {
 				if (s.items.length > 0) initImage(s);
 			});
@@ -279,7 +393,6 @@ const renderGroups = [
 			};
 		}
 
-		// 页面加载完成后初始化轮播
 		if (document.readyState === 'loading') {
 			document.addEventListener('DOMContentLoaded', initFullscreenWallpaperCarousel);
 		} else {
