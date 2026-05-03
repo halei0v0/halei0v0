@@ -111,7 +111,7 @@
   }
 
   table {
-    @apply w-full border-separate m-0 bg-[var(--card-bg)];
+    @apply w-full border-separate m-0 bg-(--card-bg);
     border-spacing: 0;
 
     border: 1px solid var(--line-divider);

@@ -28,7 +28,7 @@ const diaryData: DiaryItem[] = [
 		images: ["/images/diary/start3.jpeg","/images/diary/show1.jpeg"],
 	},
 	{
-		id: 2,
+		id: 3,
 		content:
 			"2025.11.22博客更新到V7.5",
 		date: "2025-11-22",
@@ -58,7 +58,7 @@ export const getDiaryStats = () => {
 
 // 获取日记列表（按时间倒序）
 export const getDiaryList = (limit?: number) => {
-	const sortedData = diaryData.sort(
+	const sortedData = [...diaryData].sort(
 		(a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
 	);
 

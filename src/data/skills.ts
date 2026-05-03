@@ -68,9 +68,6 @@ export const skillsData: Skill[] = [
 		projects: ["game-engine", "system-optimization"],
 		color: "#00599C",
 	},
-	
-
-
 
 	// Tools
 	{

@@ -2,16 +2,19 @@
 <p>已运行 <span id="runtime"></span></p>
 
 <script>
-  const start = new Date("2025-10-08").getTime();
-  function update() {
-    const now = new Date().getTime();
-    const diff = now - start;
-    const d = Math.floor(diff / 86400000);
-    const h = Math.floor((diff % 86400000) / 3600000);
-    const m = Math.floor((diff % 3600000) / 60000);
-    const s = Math.floor((diff % 60000) / 1000);
-    document.getElementById("runtime").textContent = d + "天" + h + "时" + m + "分" + s + "秒";
+  if (typeof window.runtimeStart === 'undefined') {
+    window.runtimeStart = new Date("2025-10-08").getTime();
+    window.runtimeUpdate = function() {
+      const now = new Date().getTime();
+      const diff = now - window.runtimeStart;
+      const d = Math.floor(diff / 86400000);
+      const h = Math.floor((diff % 86400000) / 3600000);
+      const m = Math.floor((diff % 3600000) / 60000);
+      const s = Math.floor((diff % 60000) / 1000);
+      const el = document.getElementById("runtime");
+      if (el) el.textContent = d + "天" + h + "时" + m + "分" + s + "秒";
+    };
+    window.runtimeUpdate();
+    setInterval(window.runtimeUpdate, 1000);
   }
-  update();
-  setInterval(update, 1000);
 </script>

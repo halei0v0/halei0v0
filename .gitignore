@@ -3,7 +3,8 @@ dist/
 
 # generated types
 .astro/
-
+demo
+plans
 # dependencies
 node_modules/
 
@@ -36,6 +37,7 @@ yarn.lock
 # ide
 .idea
 *.iml
+.claude
 
 cache/
 fuwari/
@@ -47,4 +49,6 @@ src/data/bangumi-data.json
 
 # Bilibili generated data
 src/data/bilibili-data.json
-/nul
+
+# Lighthouse CI
+.lighthouseci/

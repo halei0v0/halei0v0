@@ -19,7 +19,6 @@ export const friendsData: FriendItem[] = [
 		desc: "The web framework for content-driven websites. ⭐️ Star to support our work!",
 		siteurl: "https://github.com/withastro/astro",
 		tags: ["Framework"],
-		
 	},
 	{
 		id: 2,
@@ -41,7 +40,7 @@ export const friendsData: FriendItem[] = [
 	},
 	{
 		id: 4,
-		title: "THW’s Blog",
+		title: "THW's Blog",
 		imgurl:
 			"https://image.tianhw.top/avatar.webp",
 		desc: "前途似海，来日方长",

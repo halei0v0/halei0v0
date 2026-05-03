@@ -1,9 +1,9 @@
-@reference "tailwindcss";
-
 :root {
   --tk-text: black;
   --code-block-text: #333; /* 调整为深色但在浅色背景下仍然舒适的值 */
 }
+
+@reference "tailwindcss";
 
 html.dark {
   --tk-text: #d1d5db;
@@ -26,7 +26,7 @@ html.dark {
     @apply flex-col-reverse;
     .tk-input {
       textarea {
-        @apply rounded-(--radius-large) py-4 px-6 min-h-[150px]! focus:border-(--primary);
+        @apply rounded-(--radius-large) py-4 px-6 !min-h-[150px] focus:border-(--primary);
       }
     }
   }
@@ -38,11 +38,11 @@ html.dark {
   div {
     @apply min-h-10;
     .el-input-group__prepend {
-      @apply bg-inherit! rounded-l-lg;
+      @apply !bg-inherit rounded-l-lg;
       min-height: inherit;
     }
     input {
-      @apply px-4 rounded-r-lg focus:border-(--primary)!;
+      @apply px-4 rounded-r-lg focus:!border-(--primary);
       min-height: inherit;
     }
   }
@@ -50,16 +50,16 @@ html.dark {
 
 /* Button */
 .tk-row.actions {
-  @apply w-full ml-0! mt-0!;
+  @apply w-full !ml-0 !mt-0;
   .__markdown {
-    @apply hidden!;
+    @apply !hidden;
   }
   .tk-preview,
   .tk-send,
   .tk-cancel {
     @apply border-none rounded-lg px-3 py-0 h-8
-       bg-(--btn-regular-bg-active)! disabled:bg-(--btn-regular-bg)!
-      text-(--btn-content)! disabled:text-[#ffffffa1]!;
+       !bg-(--btn-regular-bg-active) disabled:!bg-(--btn-regular-bg)
+      !text-(--btn-content) disabled:!text-[#ffffffa1];
   }
 }
 
@@ -134,7 +134,7 @@ html.dark {
 
 .twikoo .code-block {
   pre {
-    @apply rounded-xl!;
+    @apply !rounded-xl;
   }
 
   /* Code block fall back */

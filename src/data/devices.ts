@@ -9,9 +9,7 @@ export interface Device {
 }
 
 // 设备类别类型，支持品牌和自定义类别
-export type DeviceCategory = {
-	[categoryName: string]: Device[];
-} & {
+export type DeviceCategory = Record<string, Device[]> & {
 	自定义?: Device[];
 };
 
@@ -80,17 +78,5 @@ export const devicesData: DeviceCategory = {
 				"CPU散热器，一体式水冷散热器散热方式	水冷|适用范围	Intel：LGA 115X/1200/1700/1851/2011/2066产品尺寸	397×120×27mm其它特点	屏幕参数：2.4寸IPS显示屏，320*240分辨率，450nits峰值亮度 ，24BIT真彩色风扇数量	1个风扇尺寸	120×120×25mm轴承类型	流体动态轴承（FDB）最高转数	2000RPM转数描述	2000±10%RPM最大风量	70.84CFM风压	2.63mmaq噪音	≤29.8dB端子接口	4PIN PWM+3PIN ARGB水冷排类型	360mm冷排冷头尺寸	69.2×69.2×60mm",
 			link: "https://detail.zol.com.cn/cooling_product/index2111867.shtml",
 		},
-		
 	],
-	// CPU: [
-	// 	{
-	// 		name: "Intel i5 13600KF",
-	// 		image: "/images/device/mt3000.png",
-	// 		specs: "参数：",
-	// 		description:
-	// 			"Portable WiFi 6 router suitable for business trips and home use.",
-	// 		link: "https://www.gl-inet.cn/products/gl-mt3000/",
-	// 	},
-	// ],
-	//参考网站：https://www.asus.com.cn/motherboards-components/graphics-cards/tuf-gaming/tuf-rtx4070ti-o12g-white-gaming/
 };

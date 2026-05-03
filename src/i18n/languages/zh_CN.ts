@@ -82,8 +82,9 @@ export const zh_CN: Translation = {
 
 	// 短文页面
 	[Key.diarySubtitle]: "随时随地，分享生活",
-	[Key.diaryCount]: "条短文",
-	[Key.diaryReply]: "回复",
+	[Key.diaryNoResults]: "没有匹配的日记",
+	[Key.diaryCount]: "条日记",
+
 	[Key.diaryTips]: "只展示最近30条日记",
 	[Key.diaryMinutesAgo]: "分钟前",
 	[Key.diaryHoursAgo]: "小时前",
@@ -127,6 +128,8 @@ export const zh_CN: Translation = {
 	[Key.albumsBackToList]: "返回相册",
 	[Key.albumsPhotoCount]: "张照片",
 	[Key.albumsPhotosCount]: "张照片",
+	[Key.albumsFilterAll]: "全部",
+	[Key.albumsNoResults]: "没有匹配的相册",
 
 	// 设备页面
 	[Key.devices]: "我的设备",
@@ -213,6 +216,7 @@ export const zh_CN: Translation = {
 	[Key.passwordProtected]: "密码保护",
 	[Key.passwordProtectedTitle]: "此内容受密码保护",
 	[Key.passwordProtectedDescription]: "请输入密码以查看受保护的内容",
+	[Key.postEncrypted]: "已加密",
 	[Key.passwordPlaceholder]: "请输入密码",
 	[Key.passwordUnlock]: "解锁",
 	[Key.passwordUnlocking]: "解锁中...",
@@ -227,6 +231,7 @@ export const zh_CN: Translation = {
 	[Key.syntaxHighlightFailed]: "语法高亮失败:",
 	[Key.autoSyntaxHighlightFailed]: "自动语法高亮也失败:",
 	[Key.decryptionError]: "解密过程中发生错误:",
+	[Key.passwordHint]: "提示",
 
 	//最后编辑时间卡片
 	[Key.lastModifiedPrefix]: "距离上次编辑: ",
@@ -339,4 +344,10 @@ export const zh_CN: Translation = {
 	// 布局切换按钮
 	[Key.switchToGridMode]: "切换到网格模式",
 	[Key.switchToListMode]: "切换到列表模式",
+
+	// 相关文章与随机文章
+	[Key.relatedPosts]: "相关文章",
+	[Key.randomPosts]: "随机文章",
+	[Key.smartRecommend]: "智能推荐",
+	[Key.randomRecommend]: "随机推荐",
 };

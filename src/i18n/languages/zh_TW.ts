@@ -87,8 +87,9 @@ export const zh_TW: Translation = {
 
 	// 短文頁面
 	[Key.diarySubtitle]: "隨時隨地，分享生活",
-	[Key.diaryCount]: "條短文",
-	[Key.diaryReply]: "回復",
+	[Key.diaryNoResults]: "沒有匹配的日記",
+	[Key.diaryCount]: "條日記",
+
 	[Key.diaryTips]: "只展示最近30條日記",
 	[Key.diaryMinutesAgo]: "分鐘前",
 	[Key.diaryHoursAgo]: "小時前",
@@ -132,6 +133,8 @@ export const zh_TW: Translation = {
 	[Key.albumsBackToList]: "返回相冊",
 	[Key.albumsPhotoCount]: "張照片",
 	[Key.albumsPhotosCount]: "張照片",
+	[Key.albumsFilterAll]: "全部",
+	[Key.albumsNoResults]: "沒有匹配的相冊",
 
 	// 專案展示頁面
 	[Key.projects]: "專案展示",
@@ -255,6 +258,7 @@ export const zh_TW: Translation = {
 	[Key.passwordProtected]: "密碼保護",
 	[Key.passwordProtectedTitle]: "此內容受密碼保護",
 	[Key.passwordProtectedDescription]: "請輸入密碼以查看受保護的內容",
+	[Key.postEncrypted]: "已加密",
 	[Key.passwordPlaceholder]: "請輸入密碼",
 	[Key.passwordUnlock]: "解鎖",
 	[Key.passwordUnlocking]: "解鎖中...",
@@ -269,6 +273,7 @@ export const zh_TW: Translation = {
 	[Key.syntaxHighlightFailed]: "語法高亮失敗:",
 	[Key.autoSyntaxHighlightFailed]: "自動語法高亮也失敗:",
 	[Key.decryptionError]: "解密過程中發生錯誤:",
+	[Key.passwordHint]: "提示",
 
 	//最後編輯時間卡片
 	[Key.lastModifiedPrefix]: "距離上次編輯: ",
@@ -341,4 +346,10 @@ export const zh_TW: Translation = {
 	// 布局切換按鈕
 	[Key.switchToGridMode]: "切換到網格模式",
 	[Key.switchToListMode]: "切換到列表模式",
+
+	// 相关文章与随机文章
+	[Key.relatedPosts]: "相關文章",
+	[Key.randomPosts]: "隨機文章",
+	[Key.smartRecommend]: "智能推薦",
+	[Key.randomRecommend]: "隨機推薦",
 };

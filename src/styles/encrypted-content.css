@@ -1,4 +1,5 @@
 @reference "tailwindcss";
+
 /* 加密内容的代码块样式，确保与非加密文章完全一致 */
 
 /* 基础容器样式 */
@@ -71,7 +72,7 @@
 
 /* 内联代码样式 - 与markdown.css保持一致 */
 #decrypted-content .custom-md code:not(.astro-code code) {
-  @apply bg-[var(--inline-code-bg)] text-[var(--inline-code-color)] px-1 py-0.5 rounded-md overflow-hidden;
+  @apply bg-(--inline-code-bg) text-(--inline-code-color) px-1 py-0.5 rounded-md overflow-hidden;
 }
 
 /* 代码块内的code元素不应用内联代码样式 */

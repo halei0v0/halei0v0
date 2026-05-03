@@ -1,6 +1,6 @@
-import { defineCollection } from "astro:content";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
+import { defineCollection } from "astro:content";
 
 const postsCollection = defineCollection({
 	loader: glob({ pattern: "**/*.md", base: "./src/content/posts" }),
@@ -25,6 +25,7 @@ const postsCollection = defineCollection({
 		/* Page encryption fields */
 		encrypted: z.boolean().optional().default(false),
 		password: z.string().optional().default(""),
+		passwordHint: z.string().optional().default(""),
 
 		/* Posts alias */
 		alias: z.string().optional(),

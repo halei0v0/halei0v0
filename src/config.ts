@@ -1,4 +1,4 @@
-import type {
+﻿import type {
 	AnnouncementConfig,
 	CommentConfig,
 	ExpressiveCodeConfig,
@@ -9,6 +9,8 @@ import type {
 	NavBarConfig,
 	PermalinkConfig,
 	ProfileConfig,
+	RandomPostsConfig,
+	RelatedPostsConfig,
 	SakuraConfig,
 	ShareConfig,
 	SidebarLayoutConfig,
@@ -54,7 +56,7 @@ export const siteConfig: SiteConfig = {
 		mode: "logo",
 		// 顶栏标题文本
 		text: "halei0v0 UI",
-		// 顶栏标题图标路径，默认使用 public/assets/home/home.png
+		// 顶栏标题图标路径，默认使用 public/assets/home/home.webp
 		icon: "assets/home/home.png",
 		// 网站Logo图片路径
 		logo: "assets/home/default-logo.png",
@@ -95,6 +97,10 @@ export const siteConfig: SiteConfig = {
 		defaultMode: "list",
 		// 是否允许用户切换布局
 		allowSwitch: true,
+		// 文章列表页分类导航条配置
+		categoryBar: {
+			enable: true, // 是否在文章列表页显示分类导航条
+		},
 	},
 
 	// 标签样式配置
@@ -117,28 +123,20 @@ export const siteConfig: SiteConfig = {
 
 	banner: {
 		// 支持单张图片或图片数组，当数组长度 > 1 时自动启用轮播
-		// 我添加了视频支持，但是多视频时非常吃性能【因为所有视频会同时加载】，建议不要使用过多的视频文件，或使用分辨率较低的视频文件来减少加载时间和带宽占用。
 		src: {
 			desktop: [
-				//"https://picture.halei0v0.top/videos/Classification/%E4%BA%8C%E6%AC%A1%E5%85%83/2026-05-03%2002-32%20%E3%80%90%E5%93%B2%E9%A3%8E%E5%A3%81%E7%BA%B8%E3%80%91%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97-%E5%B0%91%E5%B9%B4-%E6%A0%A1%E6%9C%8D.mp4",
 				"/assets/desktop-banner/cat (1).png",
 				"/assets/desktop-banner/cat (2).png",
 				"/assets/desktop-banner/cat (3).png",
 				"/assets/desktop-banner/cat (4).png",
-				//"/assets/desktop-banner/cat (5).png",
-		        //"/assets/desktop-banner/cat (6).png",
 				"/assets/desktop-banner/cat (7).png",
 				"/assets/desktop-banner/cat (8).png",
 				"/assets/desktop-banner/cat (9).png",
-				
 			], // 桌面横幅图片
 			mobile: [
-			    //"/assets/mobile-banner/cat (1).jpg",
 				"/assets/mobile-banner/cat (1).png",
-				//"/assets/mobile-banner/cat (2).jpg",
 				"/assets/mobile-banner/cat (2).png",
 				"/assets/mobile-banner/cat (3).jpg",
-		        //"/assets/mobile-banner/cat (3).png",
 				"/assets/mobile-banner/cat (4).png",
 				"/assets/mobile-banner/cat (5).png",
 				"/assets/mobile-banner/cat (6).png",
@@ -156,9 +154,7 @@ export const siteConfig: SiteConfig = {
 				"/assets/mobile-banner/cat (15).png",
 				"/assets/mobile-banner/cat (16).png",
 				"/assets/mobile-banner/cat (17).png",
-			    //"/assets/mobile-banner/cat (18).png",
 				"/assets/mobile-banner/cat (19).png",
-				
 			], // 移动横幅图片
 		}, // 使用本地横幅图片
 
@@ -252,7 +248,17 @@ export const siteConfig: SiteConfig = {
 			enableCompress: true, // 启用字体子集优化，减少字体文件大小
 		},
 	},
-	showLastModified: true, // 控制“上次编辑”卡片显示的开关
+	showLastModified: true, // 控制"上次编辑"卡片显示的开关
+	pageProgressBar: {
+		enable: true, // 启用页面顶部进度条
+		height: 3, // 进度条高度 3px
+		duration: 6000, // 动画时长 6s
+	},
+
+	thirdPartyAnalytics: {
+		enable: false, // 是否启用第三方统计（Microsoft Clarity），默认关闭，启用可能影响 Lighthouse 评分
+		clarityId: "", // Clarity 项目 ID
+	},
 };
 export const fullscreenWallpaperConfig: FullscreenWallpaperConfig = {
 	src: {
@@ -261,20 +267,14 @@ export const fullscreenWallpaperConfig: FullscreenWallpaperConfig = {
 			"/assets/desktop-banner/cat (2).png",
 			"/assets/desktop-banner/cat (3).png",
 			"/assets/desktop-banner/cat (4).png",
-			//"/assets/desktop-banner/cat (5).png",
-			//"/assets/desktop-banner/cat (6).png",		        
 			"/assets/desktop-banner/cat (7).png",
 			"/assets/desktop-banner/cat (8).png",
 			"/assets/desktop-banner/cat (9).png",
-			"https://picture.halei0v0.top/videos/Classification/%E4%BA%8C%E6%AC%A1%E5%85%83/2026-05-03%2002-32%20%E3%80%90%E5%93%B2%E9%A3%8E%E5%A3%81%E7%BA%B8%E3%80%91%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97-%E5%B0%91%E5%B9%B4-%E6%A0%A1%E6%9C%8D.mp4",
 		], // 桌面横幅图片
 		mobile: [
-			//"/assets/mobile-banner/cat (1).jpg",
 			"/assets/mobile-banner/cat (1).png",
-			//"/assets/mobile-banner/cat (2).jpg",
 			"/assets/mobile-banner/cat (2).png",
 			"/assets/mobile-banner/cat (3).jpg",
-		    //"/assets/mobile-banner/cat (3).png",
 			"/assets/mobile-banner/cat (4).png",
 			"/assets/mobile-banner/cat (5).png",
 			"/assets/mobile-banner/cat (6).png",
@@ -292,9 +292,7 @@ export const fullscreenWallpaperConfig: FullscreenWallpaperConfig = {
 			"/assets/mobile-banner/cat (15).png",
 			"/assets/mobile-banner/cat (16).png",
 			"/assets/mobile-banner/cat (17).png",
-		    //"/assets/mobile-banner/cat (18).png",
 			"/assets/mobile-banner/cat (19).png",
-			"https://picture.halei0v0.top/videos/Classification/%E4%BA%8C%E6%AC%A1%E5%85%83/2026-05-03%2002-32%20%E3%80%90%E5%93%B2%E9%A3%8E%E5%A3%81%E7%BA%B8%E3%80%91%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97-%E5%B0%91%E5%B9%B4-%E6%A0%A1%E6%9C%8D.mp4",
 		], // 移动横幅图片
 	}, // 使用本地横幅图片
 	position: "center", // 壁纸位置，等同于 object-position
@@ -442,15 +440,17 @@ export const permalinkConfig: PermalinkConfig = {
 	 * - %minute% : 2位分钟 (00-59)
 	 * - %second% : 2位秒数 (00-59)
 	 * - %post_id% : 文章序号（按发布时间升序排列，最早的文章为1）
-	 * - %postname% : 文章文件名（slug）
+	 * - %postname% : 文章文件名（slug，通常为全小写）
+	 * - %raw_postname% : 文章原始文件名（保留大小写）
 	 * - %category% : 分类名（无分类时为 "uncategorized"）
 	 *
 	 * 示例：
 	 * - "%year%-%monthnum%-%postname%" => "/2024-12-my-post/"
 	 * - "%post_id%-%postname%" => "/42-my-post/"
 	 * - "%category%-%postname%" => "/tech-my-post/"
+	 * - "%year%/%monthnum%/%day%/%postname%" => "/2024/12/01/my-post/"
 	 *
-	 * 注意：不支持斜杠 "/"，所有生成的链接都在根目录下
+	 * 注意：支持使用斜杠 "/" 构建嵌套路径。
 	 */
 	format: "%postname%", // 默认使用文件名
 };
@@ -465,9 +465,24 @@ export const expressiveCodeConfig: ExpressiveCodeConfig = {
 
 export const commentConfig: CommentConfig = {
 	enable: true, // 启用评论功能。当设置为 false 时，评论组件将不会显示在文章区域。
+	system: "twikoo", // 评论系统选择: "twikoo" | "giscus"
 	twikoo: {
 		envId: "https://tool.v-blog.halei0v0.top",
 		lang: "zh_CN", // 设置 Twikoo 评论系统语言为中文
+	},
+	giscus: {
+		repo: "your-github-username/your-repo-name",
+		repoId: "your-repo-id",
+		category: "Announcements",
+		categoryId: "your-category-id",
+		mapping: "pathname",
+		strict: "0",
+		reactionsEnabled: "1",
+		emitMetadata: "0",
+		inputPosition: "top",
+		theme: "preferred_color_scheme",
+		lang: SITE_LANG,
+		loading: "lazy",
 	},
 };
 
@@ -489,6 +504,8 @@ export const announcementConfig: AnnouncementConfig = {
 
 export const musicPlayerConfig: MusicPlayerConfig = {
 	enable: true, // 启用音乐播放器功能
+	showFloatingPlayer: true, // 显示悬浮播放器 UI
+	floatingEntryMode: "fab", // 悬浮入口模式："default" 为独立悬浮播放器，"fab" 为集成到通用 FAB 组
 	mode: "meting", // 音乐播放器模式，可选 "local" 或 "meting"
 	meting_api:
 		"https://meting.mysqil.com/api?server=:server&type=:type&id=:id&auth=:auth&r=:r", // Meting API 地址
@@ -645,7 +662,7 @@ export const sakuraConfig: SakuraConfig = {
 
 // Pio 看板娘配置
 export const pioConfig: import("./types/config").PioConfig = {
-	enable: false, // 启用看板娘
+	enable: false, // 禁用看板娘以提升性能
 	models: ["/pio/models/pio/model.json"], // 默认模型路径
 	position: "left", // 模型位置
 	width: 280, // 默认宽度
@@ -667,6 +684,18 @@ export const pioConfig: import("./types/config").PioConfig = {
 	},
 };
 
+// 相关文章配置
+export const relatedPostsConfig: RelatedPostsConfig = {
+	enable: true,
+	maxCount: 5,
+};
+
+// 随机文章配置
+export const randomPostsConfig: RandomPostsConfig = {
+	enable: true,
+	maxCount: 5,
+};
+
 // 导出所有配置的统一接口
 export const widgetConfigs = {
 	profile: profileConfig,
@@ -677,6 +706,8 @@ export const widgetConfigs = {
 	fullscreenWallpaper: fullscreenWallpaperConfig,
 	pio: pioConfig,
 	share: shareConfig,
+	relatedPosts: relatedPostsConfig,
+	randomPosts: randomPostsConfig,
 } as const;
 
 export const umamiConfig = {

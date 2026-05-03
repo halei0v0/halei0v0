@@ -11,11 +11,12 @@ export interface Project {
 	status: "completed" | "in-progress" | "planned";
 	liveDemo?: string;
 	sourceCode?: string;
+	visitUrl?: string;
 	startDate: string;
 	endDate?: string;
 	featured?: boolean;
 	tags?: string[];
-	visitUrl?: string; // 添加前往项目链接字段
+	showImage?: boolean;
 }
 
 export const projectsData: Project[] = [
@@ -31,7 +32,6 @@ export const projectsData: Project[] = [
 		liveDemo: "https://halei0v0.github.io",
 		sourceCode: "https://github.com/halei0v0.github.io",
 		startDate: "2025-10-08",
-		//endDate: "2024-06-01",
 		featured: true,
 		tags: ["Blog", "Theme", "哈雷0V0"],
 	},
@@ -68,7 +68,9 @@ export const projectsData: Project[] = [
 // Get project statistics
 export const getProjectStats = () => {
 	const total = projectsData.length;
-	const completed = projectsData.filter((p) => p.status === "completed").length;
+	const completed = projectsData.filter(
+		(p) => p.status === "completed",
+	).length;
 	const inProgress = projectsData.filter(
 		(p) => p.status === "in-progress",
 	).length;
