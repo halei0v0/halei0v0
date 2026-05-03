@@ -3,6 +3,19 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import Fontmin from "fontmin";
 
+// 全局错误处理：确保字体压缩失败时不会中断构建
+process.on("uncaughtException", (error) => {
+	console.log("⚠ Font compression encountered an error, continuing build without optimized fonts");
+	console.log(`  Error: ${error.message}`);
+	process.exit(0);
+});
+
+process.on("unhandledRejection", (reason) => {
+	console.log("⚠ Font compression encountered an error, continuing build without optimized fonts");
+	console.log(`  Error: ${reason}`);
+	process.exit(0);
+});
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -1342,4 +1355,10 @@ async function updateCssFontReferences() {
 }
 
 // 运行压缩
-compressFonts().then(() => updateCssFontReferences());
+compressFonts()
+	.then(() => updateCssFontReferences())
+	.catch((error) => {
+		console.log("⚠ Font compression failed, continuing build without optimized fonts");
+		console.log(`  Error: ${error.message}`);
+		process.exit(0);
+	});
