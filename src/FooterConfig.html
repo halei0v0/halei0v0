@@ -1,5 +1,5 @@
 <p>开始于2025.10.08</p>
-<p>已运行 <span id="runtime"></span></p>
+<p>已运行 <span class="runtime-counter"></span></p>
 
 <script>
   if (typeof window.runtimeStart === 'undefined') {
@@ -11,8 +11,10 @@
       const h = Math.floor((diff % 86400000) / 3600000);
       const m = Math.floor((diff % 3600000) / 60000);
       const s = Math.floor((diff % 60000) / 1000);
-      const el = document.getElementById("runtime");
-      if (el) el.textContent = d + "天" + h + "时" + m + "分" + s + "秒";
+      const text = d + "天" + h + "时" + m + "分" + s + "秒";
+      document.querySelectorAll(".runtime-counter").forEach(function(el) {
+        el.textContent = text;
+      });
     };
     window.runtimeUpdate();
     setInterval(window.runtimeUpdate, 1000);
