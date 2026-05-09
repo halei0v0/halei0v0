@@ -9,7 +9,7 @@
 export function findActiveHeadingIndex(
 	headings: HTMLElement[],
 	scrollY?: number,
-	offsetTop = 150,
+	offsetTop = 80,
 ): number {
 	const scroll = scrollY ?? window.scrollY;
 	let activeIndex = -1;

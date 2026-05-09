@@ -45,7 +45,7 @@
 	const updateActiveHeading = () => {
 		const headings = document.querySelectorAll("h1, h2, h3, h4, h5, h6");
 		const scrollTop = window.scrollY;
-		const offset = 100;
+		const offset = 80;
 
 		let currentActiveId = "";
 		headings.forEach((heading) => {
