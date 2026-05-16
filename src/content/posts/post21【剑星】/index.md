@@ -10,8 +10,6 @@ draft: false
 
 # 【破解下载资源】剑星
 
-![剑星 capsule_616x353.jpg](https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3489700/22469f910e2be326ea2a70d10601e3521c7b105d/capsule_616x353_2x.jpg)
-
 | 游戏名称 |                    剑星                    |
 | :------: | :----------------------------------------: |
 | 发行日期 |                 2024/4/26                  |

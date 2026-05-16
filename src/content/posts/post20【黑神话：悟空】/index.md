@@ -10,10 +10,6 @@ draft: false
 
 # 【破解下载资源】黑神话：悟空
 
-![img](https://gamedz.org/images/2025/10/Black-Myth-Wukong-Game-for-PC-Crack-Watch.webp)
-
-
-
 | 游戏名称 |                   Black Myth: Wukong                   |
 | :------: | :----------------------------------------------------: |
 | 发行日期 |                       2024/8/19                        |
