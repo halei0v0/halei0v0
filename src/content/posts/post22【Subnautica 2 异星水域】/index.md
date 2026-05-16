@@ -1,7 +1,7 @@
 ---
-title: Subnautica 2: 异星水域
+title: Subnautica 2:异星水域
 published: 2026-05-17
-description: 【破解下载资源】Subnautica 2: 异星水域
+description: 【破解下载资源】Subnautica 2:异星水域
 tags: [游戏,破解]
 image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1962700/ceed43f5d774d84a5578eccaaec6842cb9591667/capsule_616x353_2x.jpg"
 category: 游戏
