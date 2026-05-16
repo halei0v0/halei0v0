@@ -1,5 +1,5 @@
 ---
-title: 黑神话：悟空
+title: 剑星
 published: 2026-05-17
 description: 【破解下载资源】剑星
 tags: [游戏,破解]
