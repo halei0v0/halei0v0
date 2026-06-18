@@ -9,9 +9,9 @@ draft: false
 
 # **一、什么是虚拟机**
 
-> 省流：**下载地址：**【来源于[蓝点网](https://www.landiannews.com/download/107180.html?utm_sources=ourl)】
+> 省流：**下载地址：**【来源于[蓝点网](https://dl.landian.news/?dir=soft/vmware/workstation)】
 >
-> [VMware Workstation Pro v17.6.2](https://dl.lancdn.com/landian/soft/vmware/workstation/)：https://dl.lancdn.com/landian/soft/vmware/workstation/
+> [VMware-Workstation-Full-26H1](https://dl.landian.news/?dir=soft/vmware/workstation)：https://dl.landian.news/?dir=soft/vmware/workstation
 
 虚拟机指通过软件模拟的具有完整硬件系统功能的、运行在一个完全隔离环境中的完整计算机系统，在实体计算机中能够完成的工作在虚拟机中都能够实现。
 
@@ -33,9 +33,9 @@ VMware 是一款功能强大的桌面虚拟计算机软件，提供用户可在�
 
 :::
 
-**下载地址：**【来源于[蓝点网](https://www.landiannews.com/download/107180.html?utm_sources=ourl)】
+**下载地址：**【来源于[蓝点网]([soft/vmware/workstation • 蓝点网下载服务器](https://dl.landian.news/?dir=soft/vmware/workstation))】
 
-[VMware Workstation Pro v17.6.2](https://dl.lancdn.com/landian/soft/vmware/workstation/)：https://dl.lancdn.com/landian/soft/vmware/workstation/
+[VMware-Workstation-Full-26H1](https://dl.landian.news/?dir=soft/vmware/workstation)：https://dl.landian.news/?dir=soft/vmware/workstation
 
 **下面是更新日志：**
 
