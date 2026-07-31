@@ -1,119 +1,102 @@
 ---
-title: AIRI赛博生命（赛博 waifu、数字桌宠）
+title: "AIRI：开源 AI 数字桌宠 / 赛博生命"
 published: 2026-03-08
-description: 让 AI waifu / 虚拟角色也能来到我们的世界
-tags: [AI,工具]
+description: "一个模型驱动的开源数字生命容器：能聊天、能听见、能开口说话，支持 Live2D / VRM 桌宠、游戏智能体与 MCP 工具。"
+tags: [AI, 工具]
 image: "https://picture.tianhw.top/images/1070.webp"
 category: 工具
 draft: false
+comment: true
+sourceLink: "https://github.com/moeru-ai/airi"
 ---
 
-<h1 align="center">赛博生命 AIRI</h1>
+# AIRI：开源 AI 数字桌宠 / 赛博生命
 
-你是否梦想过拥有一个赛博生命（赛博 waifu、数字桌宠），或者能与你玩耍和交谈的数字伴侣？
+> 模型驱动的灵魂容器，什么都能做一点的桌宠：让 Neuro-sama 这样的虚拟伴侣也成为我们世界中的一员吧！
 
-借助现代大型语言模型的力量，像是 [ChatGPT](https://chatgpt.com) 和著名的 [Claude](https://claude.ai) 所能带来的，想要 LLM（大语言模型）和我们角色扮演、聊天已经超简单了，每个人都能上手。而像 [Character.ai（又称 c.ai）](https://character.ai) 和 [JanitorAI](https://janitorai.com/) 这样的平台，以及本地应用如 [SillyTavern（又称酒馆）](https://github.com/SillyTavern/SillyTavern)，已经是基于聊天或文字冒险游戏体验的相当不错的解决方案。
+::github{repo="moeru-ai/airi"}
 
-> 但是，如何赋予它们玩游戏的能力呢？让它们能看到你正在编写的代码？不仅能一边聊天一边玩游戏，也可以看视频，还能做很多其他事情？
+你是否梦想过拥有一个赛博生命（赛博 waifu、数字桌宠），一个能陪你玩耍、交谈的数字伴侣？今天给大家介绍一个能实现这个愿望的开源项目——**Project AIRI**。
 
-你可能已经知道 [Neuro-sama](https://www.youtube.com/@Neurosama)，她目前是最好的能够玩游戏、聊天并与你和参与者（在VTuber社区中）互动的 AI VTuber / 伴侣，有些人也称这种存在为"数字人"。**可惜的是，她并不开源，当她从直播中下线后，你就无法与她互动了**。
+## 🌐 相关链接
 
-因此，这个项目 AIRI，在这里提供了另一种可能性：**让你轻松拥有自己的数字生命、赛博生命，随时随地**。
+- [🌍 官网](https://airi.moeru.ai)
+- [📚 中文文档](https://airi.moeru.ai/docs/zh-Hans/)
+- [🚀 网页版在线体验](https://airi.moeru.ai/)
+- [📦 桌面版下载（GitHub Releases）](https://github.com/moeru-ai/airi/releases/latest)
+- [💬 Discord 社区](https://discord.gg/TgQ3Cu2F7A)
 
-- https://airi.moeru.ai/docs/zh-Hans/)
+## 🧠 这是什么？
 
+借助现代大语言模型的力量（如 ChatGPT、Claude），让 AI 和你角色扮演聊天早已不是难事——[Character.ai](https://character.ai)、[JanitorAI](https://janitorai.com/) 和 [SillyTavern](https://github.com/SillyTavern/SillyTavern)（酒馆）都是相当成熟的方案。但 AIRI 想推进的是另一件事：
 
-> 此项目深受 [Neuro-sama](https://www.youtube.com/@Neurosama) 启发
->
+> **让一个虚拟角色真正「住」进你的电脑、浏览器或移动设备里**——能说话、能听见、能显示自己的身体，还能逐步接入游戏、直播、Discord、Telegram 和 MCP 工具。
 
-## 这个项目有什么特别？
+你可能听说过 [Neuro-sama](https://www.youtube.com/@Neurosama)，她是最出色的 AI VTuber 之一，能玩游戏、聊天并与观众互动。可惜她并不开源，直播下线后你就无法与她互动了。AIRI 正是受她启发的**开源替代方向**，让你随时随地拥有自己的数字生命。
 
-与其他 AI 和 LLM 驱动的 VTuber 开源项目不同，アイリ VTuber 从开始开发的第一天开始就支持多种 Web 技术，涵盖诸如 [WebGPU](https://www.w3.org/TR/webgpu/)、[WebAudio](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API)、[Web Workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers)、[WebAssembly](https://webassembly.org/)、[WebSocket](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket) 等已经广泛应用或仍在大量实验的 API。
+## ✨ 特别之处
 
-> [!TIP]
-> 担心使用 Web 技术会导致性能下降吗？
->
-> 不用担心，浏览器版本旨在展示我们在浏览器和 webview 里能做到什么，但不会完全依赖它。AIRI 的桌面版默认可用 [NVIDIA CUDA](https://developer.nvidia.com/cuda-toolkit) 和 [Apple Metal](https://developer.apple.com/metal/)（多亏了 HuggingFace 与可爱的 [candle](https://github.com/huggingface/candle) 项目），且无需复杂的依赖管理。考虑到取舍，我们在图形、布局、动画和 WIP 插件系统上部分使用了 Web 技术，方便大家集成。
+与其他 AI VTuber 开源项目不同，AIRI 从第一天起就大量使用 Web 技术（WebGPU、WebAudio、Web Workers、WebAssembly、WebSocket），把重心放在「角色如何进入真实环境」：
 
-这意味着 **アイリ VTuber 能够在现代浏览器和设备上运行**，甚至能够在移动设备上运行（已经完成了 PWA 支持），这为我们（贡献者们）带来了更多的可能性，让我们得以更进一步构建和扩展 アイリ VTuber 的外部功能，而与此同时也不失配置的灵活性——可以有选择地在不同设备上启用会需要 TCP 连接或其他非 Web 技术的功能，例如连接到 Discord 的语音频道一起开黑，或是和朋友们一起玩 Minecraft（我的世界）、Factorio（异星工厂）。
+| 维度 | 说明 |
+|------|------|
+| 🫧 **身体** | 支持 Live2D 与 VRM 模型，拥有可互动的 2D / 3D 表现，自动眨眼、自动看、空闲眼睛移动 |
+| 🎙️ **声音** | 整合 TTS（如 ElevenLabs）、STT 语音识别与说话检测，让角色可以开口、听见你说话 |
+| 📖 **上下文** | 插件系统正在把应用状态、开发环境、游戏状态等上下文接入对话流程 |
+| 🎮 **行动能力** | Minecraft、Factorio、Discord、Telegram 等服务模块，展示作为智能体参与外部世界的方向 |
+| 📱 **可移植** | 网页、桌面、移动端共用基础设施，支持 PWA，手机上也能用 |
 
-## 当前进度
+::::tip
+**担心 Web 技术性能下降？** 不用太担心——浏览器版只是用来展示 Web 能做到什么，并不完全依赖它。桌面版默认支持 NVIDIA CUDA 与 Apple Metal 加速（基于 [candle](https://github.com/huggingface/candle)），且无需复杂的依赖管理。
+::::
 
-目前已经能做到：
-- [x] 大脑
+## ✅ 当前进度
+
+- [x] **大脑**
   - [x] 玩 [Minecraft](https://www.minecraft.net)
-  - [x] 玩 [Factorio](https://www.factorio.com)（进行中，但已提供 [PoC 和 demo](https://github.com/moeru-ai/airi-factorio)）
-  - [x] 在 [Telegram](https://telegram.org) 聊天
-  - [x] 在 [Discord](https://discord.com) 聊天
-  - [ ] 记忆
-    - [x] 纯浏览器内数据库支持（DuckDB WASM | `pglite`）
-    - [ ] Alaya 记忆层（施工中）
-  - [ ] 纯浏览器的本地推理（基于 WebGPU）
-- [x] 耳朵
-  - [x] 浏览器音频输入
-  - [x] [Discord](https://discord.com) 音频输入
-  - [x] 客户端语音识别
-  - [x] 客户端说话检测
-- [x] 嘴巴
+  - [x] 玩 [Factorio](https://www.factorio.com)（已提供 [PoC 与 demo](https://github.com/moeru-ai/airi-factorio)）
+  - [x] 在 [Telegram](https://telegram.org) / [Discord](https://discord.com) 聊天
+  - [ ] 记忆（浏览器内数据库 DuckDB WASM / `pglite` 已完成，Alaya 记忆层施工中）
+  - [ ] 纯浏览器本地推理（基于 WebGPU）
+- [x] **耳朵**
+  - [x] 浏览器 / Discord 音频输入
+  - [x] 客户端语音识别与说话检测
+- [x] **嘴巴**
   - [x] [ElevenLabs](https://elevenlabs.io/) 语音合成
-- [x] 身体
-  - [x] VRM 支持
-    - [x] 控制 VRM 模型
-  - [x] VRM 模型动画
-    - [x] 自动眨眼
-    - [x] 自动看
-    - [x] 空闲眼睛移动
-  - [x] Live2D 支持
-    - [x] 控制 Live2D 模型
-  - [x] Live2D 模型动画
-    - [x] 自动眨眼
-    - [x] 自动看
-    - [x] 空闲眼睛移动
+- [x] **身体**
+  - [x] VRM 模型控制与动画（自动眨眼 / 自动看 / 空闲眼睛移动）
+  - [x] Live2D 模型控制与动画（自动眨眼 / 自动看 / 空闲眼睛移动）
 
-## 开发
+## 🚀 怎么开始玩？
 
-> 开发本项目的详细指南请参阅 [CONTRIBUTING.md](../.github/CONTRIBUTING.md)
+### 网页版（零配置体验）
 
-> [!NOTE]
-> 默认情况下 `pnpm dev` 会启动 Stage Web（浏览器版）的开发服务器；如果你想尝试桌面版，请先阅读 [CONTRIBUTING.md](../.github/CONTRIBUTING.md) 正确完成环境配置。
+打开 [airi.moeru.ai](https://airi.moeru.ai)，配置模型提供商（支持 OpenAI 兼容接口、OpenRouter、DeepSeek、Ollama、Qwen、Gemini、Claude 等）和 API Key，即可开始对话。也支持 PWA，手机上也能用，适合快速尝鲜。
+
+### 桌面版（桌宠模式）
+
+桌面版基于 Electron，可让 AIRI 以 Live2D / VRM 模型常驻桌面，提供系统托盘、窗口穿透、悬停淡化、本地模型接入等桌宠式交互。从 [GitHub Releases](https://github.com/moeru-ai/airi/releases/latest) 下载即可。
+
+### 本地开发
+
+想折腾源码的话：
 
 ```shell
 pnpm i
-pnpm dev
+pnpm dev        # 网页版
+pnpm dev:tamagotchi  # 桌面版（aka 电子宠物）
 ```
 
-### 网页版 (也就是 [airi.moeru.ai](https://airi.moeru.ai) 的版本)
-
-```shell
-pnpm dev
-```
-
-### 桌面版（也叫拓麻歌子，aka 电子宠物）
-
-```shell
-pnpm dev:tamagotchi
-```
-
-我们提供了拓麻歌子的 Nix 包。先启用 flakes，然后可以直接运行：
+项目还提供了拓麻歌子的 Nix 包（需启用 flakes）：
 
 ```shell
 nix run github:moeru-ai/airi
 ```
 
-### 文档站
+::::note
+**仍在快速演进**：发布版优先保证聊天、角色、模型显示与基础设置；Minecraft 智能体、Discord / Telegram 机器人、Factorio、插件宿主、MCP 等高级能力可能还需要从源码配置或参与开发。详细指南见[开发者文档](https://airi.moeru.ai/docs/zh-Hans/docs/contributing/)。
+::::
 
-```shell
-pnpm dev:docs
-```
-
-### 发布
-
-运行 `bumpp` 后，请记得在 `Cargo.toml` 中更新版本号：
-
-```shell
-npx bumpp --no-commit --no-tag
-```
-
-## Star History
+## ⭐ Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=moeru-ai/airi&type=Date)](https://www.star-history.com/#moeru-ai/airi&Date)

@@ -174,7 +174,7 @@ export const siteConfig: SiteConfig = {
 		// PicFlow API支持(智能图片API)
 		imageApi: {
 			enable: false, // 启用图片API
-			url: "https://picture.halei0v0.top/api/random", // API地址，返回每行一个图片链接的文本
+			url: "https://picture.halei0v0.ccwu.cc/api/random", // API地址，返回每行一个图片链接的文本
 		},
 		// 这里需要使用PicFlow API的Text返回类型,所以我们需要format=text参数
 		// 项目地址:https://github.com/matsuzaka-yuki/PicFlow-API
@@ -469,7 +469,7 @@ export const commentConfig: CommentConfig = {
 	enable: true, // 启用评论功能。当设置为 false 时，评论组件将不会显示在文章区域。
 	system: "twikoo", // 评论系统选择: "twikoo" | "giscus"
 	twikoo: {
-		envId: "https://tool.v-blog.halei0v0.top",
+		envId: "https://tool.halei0v0.dpdns.org",
 		lang: "zh_CN", // 设置 Twikoo 评论系统语言为中文
 	},
 	giscus: {

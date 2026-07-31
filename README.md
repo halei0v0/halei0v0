@@ -25,7 +25,7 @@
 
 - **FXdownloader**：一款便捷的番茄小说下载工具，基于 Python 开发，帮你轻松获取心仪的小说内容
 - **H-CAT**：基于 Mizuki 打造的二次元猫猫（猫羽雫）主题博客模板，兼具萌系视觉与完整博客功能，为创作者提供个性化的内容展示平台
-- **blog**：我的博客总纲仓库，我的个人博客可访问[https://v-blog.halei0v0.top](https://v-blog.halei0v0.top/)，在这里会分享我的技术心得、项目经验和日常感悟
+- **blog**：我的博客总纲仓库，我的个人博客可访问[https://blog.halei0v0.dpdns.org](https://blog.halei0v0.dpdns.org)，在这里会分享我的技术心得、项目经验和日常感悟
 - **halei0v0.github.io**：我的个人导航主页，用 HTML 搭建的轻量化导航入口，方便快速访问常用站点
 - **warehouse**：用于存储各类技术资源和项目备份的仓库，是我的线上 “资源收纳箱”
 - **Novelreader**：一个看小说的静态网站
